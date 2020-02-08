@@ -1,0 +1,449 @@
+body,
+html,
+* {
+  background: rgb(44, 45, 65);
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  color: rgb(255, 232, 232);
+  overflow-x: hidden;
+  font-size: 11pt;
+}
+.cover {
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0 1em;
+}
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  height: auto;
+}
+a {
+  text-decoration: none;
+}
+
+.button {
+  border: 1px solid rgb(255, 119, 119);
+  padding: 0.5em 1em 0.6em 1em;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  color: #fff;
+  font-weight: bold;
+}
+.button:hover {
+  background-color: rgb(255, 119, 119);
+  border: 1px solid rgb(255, 119, 119);
+  color: white;
+  cursor: pointer;
+  text-shadow: 0 5px 10px rgb(121, 0, 0);
+}
+
+.hidden {
+  height: 0;
+  padding: 0;
+  transition: 0.3s;
+}
+.reveal {
+  height: 2.3em;
+  transition: 0.3s;
+}
+.slide {
+  transform: translateX(-140%);
+  transition: 1s;
+}
+.fadeIn {
+  width: 100%;
+  height: 100%;
+  transition: 1s ease-in-out;
+}
+.hide {
+  right: -100%;
+  transition: 1s;
+}
+
+/* flex classes */
+.flex {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: none;
+}
+.row {
+  flex-direction: row;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+
+/* NAV BAR */
+nav {
+  position: fixed;
+  width: 100%;
+  height: 5em;
+  padding: 1em;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgb(39, 41, 68);
+  z-index: 1;
+  font-family: "Roboto Mono", monospace;
+}
+nav > i {
+  font-size: 1.5em;
+}
+nav > ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+nav > ul > li {
+  display: inline-block;
+  margin: 0 1.5em 0 0;
+}
+nav > ul > li > span {
+  color: rgb(255, 119, 119);
+}
+
+/* HOME PAGE */
+.smalltext {
+  font-family: "Roboto Mono", monospace;
+  font-size: 1em;
+  color: rgb(255, 119, 119);
+}
+
+.maintext {
+  font-weight: bold;
+  font-size: 3em;
+  letter-spacing: 0.1em;
+}
+
+.subtext {
+  font-size: 2em;
+  color: rgb(255, 205, 205);
+}
+
+.arrow-down {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 2em;
+  left: 50%;
+  width: 100px;
+  margin-left: -50px;
+  margin-bottom: 3em;
+  text-align: center;
+}
+.arrow-down > p {
+  font-size: 0.4em;
+  font-family: "Roboto Mono", monospace;
+}
+.arrow-down > a > i {
+  font-size: 2.3em;
+}
+
+.media-icons {
+  position: fixed;
+  bottom: 2em;
+  left: 2em;
+  display: flex;
+  flex-direction: column;
+  background: none;
+}
+.media-icons > a > i {
+  font-size: 1.8em;
+  margin: 1em 0;
+  background: none;
+}
+.media-icons > a {
+  background: none;
+}
+.media-icons > p {
+  font-size: 1em;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+}
+
+/* ABOUT PAGE */
+.about-container > div > img {
+  width: 15em;
+  height: auto;
+  margin: 0 4em;
+}
+.backgroundtext {
+  position: absolute;
+  font-size: 20em;
+  font-weight: bold;
+  opacity: 0.05;
+  font-family: "Roboto Mono", monospace;
+  letter-spacing: -0.1em;
+  left: 0;
+  margin-top: 0.8em;
+}
+
+/* PROJECTS PAGE */
+.card {
+  width: 390px;
+  height: 320px;
+}
+.card-container {
+  width: 0;
+  height: 0;
+  padding: 1em 1.5em;
+  background: #fff;
+  text-align: center;
+}
+.card-container > p {
+  background: none;
+  color: rgb(39, 41, 68);
+}
+p.card-title {
+  font-weight: bold;
+  font-size: 2.25em;
+  font-family: "Roboto Mono", monospace;
+}
+p.card-highlight {
+  margin-top: 0.5em;
+}
+p.card-highlight > span {
+  display: inline-block;
+  background: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.8em;
+  background: rgb(255, 119, 119);
+  padding: 0.25em 0.5em;
+  border-radius: 5px;
+}
+p.card-description {
+  margin-top: 4em;
+  color: rgb(75, 77, 117);
+}
+.card:nth-child(1) {
+  background: url("imageholder1.webp") center center/cover;
+}
+.card:nth-child(2) {
+  background: url("imageholder2.jpg") center center/cover;
+}
+.card:nth-child(3) {
+  background: url("imageholder3.jpg") center center/cover;
+}
+.card:nth-child(4) {
+  background: url("imageholder4.jpg") center center/cover;
+}
+.card:nth-child(5) {
+  background: url("imageholder5.jpg") center center/cover;
+}
+.card:nth-child(6) {
+  background: url("imageholder6.jpg") center center/cover;
+}
+
+/* CONTACT */
+#contact-form {
+  margin: 0 auto;
+  width: 500px;
+  padding: 1em;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: none;
+  background: rgb(29, 30, 43);
+  padding: 1em;
+  margin: 0.5em 0;
+
+  transition: 0.3s;
+  font-family: "Roboto Mono", monospace;
+}
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0.4em #000;
+  transition: 0.3s;
+  outline: none;
+}
+
+::placeholder {
+  color: rgb(255, 205, 205);
+  opacity: 0.4;
+}
+
+.submit-button {
+  width: 100px;
+  background: none;
+  border: 2px solid #fff;
+  float: right;
+  padding: 0.75em 1em;
+}
+.submit-button:hover {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+}
+#success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-family: "Roboto Mono", monospace;
+  background: rgb(35, 160, 129);
+  color: #fff;
+  margin-bottom: 0.5em;
+}
+/* FOOTER */
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(39, 40, 58);
+  height: 8em;
+  border-top: 2px solid rgb(255, 119, 119);
+}
+footer > p {
+  background: none;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+
+/* mobile nav */
+#nav-hamburger {
+  display: none;
+}
+#mobile-nav {
+  display: flex;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: -100%;
+  height: 100%;
+  width: 70%;
+  background: #fff;
+  border-bottom-left-radius: 25%;
+  box-shadow: 0 0 10px rgb(27, 24, 78);
+  transition: 1s;
+}
+#mobile-nav > ul > li,
+#mobile-nav > ul > li > span,
+#mobile-nav > ul > li > a,
+.mobile-button {
+  background: #fff;
+  color: #000;
+  font-size: 1.15em;
+
+  font-family: "Roboto Mono", monospace;
+}
+.mobile-button {
+  font-size: 1em;
+  border: 1px solid rgb(255, 119, 119);
+  padding: 0.5em 1em 0.6em 1em;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  color: #000;
+  background: #fff;
+  font-weight: bold;
+}
+.mobile-button:hover {
+  background-color: rgb(255, 119, 119);
+  border: 1px solid rgb(255, 119, 119);
+  color: white;
+  cursor: pointer;
+  text-shadow: 0 5px 10px rgb(121, 0, 0);
+}
+#mobile-nav > ul > li {
+  padding-top: 1em;
+}
+#mobile-nav > ul > li > span {
+  color: rgb(255, 119, 119);
+}
+#mobile-nav > ul > li > a {
+  transition: color 0.2s ease-in-out;
+}
+#mobile-nav > ul > li > a:hover {
+  color: rgb(255, 119, 119);
+  transition: color 0.2s ease-in-out;
+}
+
+@media only screen and (max-width: 600px) {
+  .cover {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  nav > ul {
+    display: none;
+  }
+  #nav-hamburger {
+    display: block;
+    margin-right: 0.5em;
+  }
+  #nav-hamburger:hover {
+    cursor: pointer;
+  }
+
+  .media-icons {
+    display: none;
+  }
+  .mobile-icons {
+    display: block;
+    background: none;
+    margin-top: 5em;
+  }
+  .mobile-icons > a {
+    background: none;
+  }
+  .mobile-icons > a > i {
+    background: none;
+    color: #000;
+    font-size: 1.75em;
+    margin: 1em 0.5em;
+    transition: 0.4s ease-in-out;
+  }
+  .mobile-icons > a > i:hover {
+    transform: rotate(360deg);
+
+    color: rgb(255, 119, 119);
+    transition: 0.4s ease-in-out;
+  }
+  #close {
+    background: none;
+    color: rgb(255, 119, 119);
+    border: none;
+    font-weight: bold;
+    font-size: 2em;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 100%;
+    margin: 10px;
+
+    transition: font-size 0.1s;
+  }
+  #close:hover {
+    cursor: pointer;
+    font-size: 2.5em;
+    transition: font-size 0.1s;
+  }
+  #close:focus {
+    outline: none;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  #contact-form {
+    width: 90%;
+  }
+}
