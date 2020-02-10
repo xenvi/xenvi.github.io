@@ -24,14 +24,27 @@ $(function() {
   $("#close").click(function() {
     $("#mobile-nav").removeClass("slide");
   });
-  $(".card").hover(
+  $(".card-container").hover(
     function() {
-      $(".card-container").addClass("fadeIn");
+      $(this).addClass("fadeIn");
     },
     function() {
-      $(".card-container").removeClass("fadeIn");
+      $(this).removeClass("fadeIn");
     }
   );
+
+  $("#card1").click(function() {
+    $(".card1-open").addClass("display");
+    $(".details-card").addClass("reveal");
+  });
+  $("#card2").click(function() {
+    $(".card2-open").addClass("display");
+    $(".details-card").addClass("reveal");
+  });
+  $(".close").click(function() {
+    $(".details-card").removeClass("reveal");
+    $(".card1-open").removeClass("display");
+  });
 
   // send contact form
   $("#contact-form").submit(e => {

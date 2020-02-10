@@ -41,24 +41,29 @@ a {
   cursor: pointer;
   text-shadow: 0 5px 10px rgb(121, 0, 0);
 }
+.offsetTop {
+  margin-top: 80px;
+}
 
+.display {
+  display: flex !important;
+}
 .hidden {
   height: 0;
   padding: 0;
   transition: 0.3s;
 }
 .reveal {
-  height: 2.3em;
-  transition: 0.3s;
+  opacity: 1 !important;
+  transition: opacity 0.4s ease-in-out;
 }
 .slide {
   transform: translateX(-140%);
   transition: 1s;
 }
 .fadeIn {
-  width: 100%;
-  height: 100%;
-  transition: 1s ease-in-out;
+  opacity: 1 !important;
+  transition: 0.5s ease-in-out;
 }
 .hide {
   right: -100%;
@@ -111,6 +116,9 @@ nav > ul > li > span {
 }
 
 /* HOME PAGE */
+#home {
+  padding: 0 1em;
+}
 .smalltext {
   font-family: "Roboto Mono", monospace;
   font-size: 1em;
@@ -174,10 +182,17 @@ nav > ul > li > span {
 }
 
 /* ABOUT PAGE */
+.about-container {
+  text-align: center;
+}
+.about-container > div {
+  width: 20em;
+  margin: 0 1.5em 3em 1.5em;
+}
 .about-container > div > img {
-  width: 15em;
+  width: 14em;
   height: auto;
-  margin: 0 4em;
+  margin: 0 0 0.5em 0;
 }
 .backgroundtext {
   position: absolute;
@@ -196,11 +211,14 @@ nav > ul > li > span {
   height: 320px;
 }
 .card-container {
-  width: 0;
-  height: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
   padding: 1em 1.5em;
   background: #fff;
   text-align: center;
+
+  transition: 0.5s ease-in-out;
 }
 .card-container > p {
   background: none;
@@ -217,11 +235,10 @@ p.card-highlight {
 p.card-highlight > span {
   display: inline-block;
   background: none;
-  color: #fff;
+  color: rgb(255, 119, 119);
   font-weight: bold;
-  font-size: 0.8em;
-  background: rgb(255, 119, 119);
-  padding: 0.25em 0.5em;
+  font-size: 0.85em;
+  padding: 0.25em;
   border-radius: 5px;
 }
 p.card-description {
@@ -229,10 +246,10 @@ p.card-description {
   color: rgb(75, 77, 117);
 }
 .card:nth-child(1) {
-  background: url("imageholder1.webp") center center/cover;
+  background: url("images/socialapp.jpg") center center/cover;
 }
 .card:nth-child(2) {
-  background: url("imageholder2.jpg") center center/cover;
+  background: url("images/landingpg.jpg") center center/cover;
 }
 .card:nth-child(3) {
   background: url("imageholder3.jpg") center center/cover;
@@ -247,7 +264,60 @@ p.card-description {
   background: url("imageholder6.jpg") center center/cover;
 }
 
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.details-card {
+  opacity: 0;
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: 550px;
+  background: rgb(240, 229, 229);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 0.2em;
+
+  transition: opacity 0.4s ease-in-out;
+}
+.card1-open,
+.card2-open {
+  display: none;
+}
+
+.close {
+  background: none;
+  color: rgb(255, 119, 119);
+  border: none;
+  font-weight: bold;
+  font-size: 2em;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 100%;
+  margin: 10px;
+  float: right;
+
+  transition: font-size 0.1s;
+}
+.close:hover {
+  cursor: pointer;
+  font-size: 2.5em;
+  transition: font-size 0.1s;
+}
+.close:focus {
+  outline: none;
+}
+
 /* CONTACT */
+#contact {
+  text-align: center;
+  padding: 0 1em;
+}
 #contact-form {
   margin: 0 auto;
   width: 500px;
