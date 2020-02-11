@@ -34,16 +34,13 @@ $(function() {
   );
 
   $("#card1").click(function() {
-    $(".card1-open").addClass("display");
-    $(".details-card").addClass("reveal");
+    $(".card1-open").fadeIn(500);
   });
   $("#card2").click(function() {
-    $(".card2-open").addClass("display");
-    $(".details-card").addClass("reveal");
+    $(".card2-open").fadeIn(500);
   });
   $(".close").click(function() {
-    $(".details-card").removeClass("reveal");
-    $(".card1-open").removeClass("display");
+    $(".canvas").fadeOut(500);
   });
 
   // send contact form
