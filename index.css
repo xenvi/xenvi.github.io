@@ -85,11 +85,27 @@ a {
   flex-wrap: wrap;
 }
 
+/* CANVAS */
+#canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  z-index: 100;
+  background: none;
+}
+.animate {
+  width: 0;
+  height: 0;
+  /* background: #fff;*/
+}
+
 /* NAV BAR */
 nav {
   position: fixed;
   width: 100%;
-  height: 5em;
+  height: 75px;
   padding: 1em;
   align-items: center;
   display: flex;
@@ -110,9 +126,13 @@ nav > ul {
 nav > ul > li {
   display: inline-block;
   margin: 0 1.5em 0 0;
+  padding: 5px 0;
 }
 nav > ul > li > span {
   color: rgb(255, 119, 119);
+}
+.active {
+  border-bottom: 2px solid rgb(255, 119, 119);
 }
 
 /* HOME PAGE */
@@ -254,10 +274,10 @@ p.card-description {
   background: url("images/landingpg.jpg") center center/cover;
 }
 .card:nth-child(3) {
-  background: url("imageholder3.jpg") center center/cover;
+  background: url("images/ecommerce.png") center center/cover;
 }
 .card:nth-child(4) {
-  background: url("imageholder4.jpg") center center/cover;
+  background: url("images/realestate.png") center center/cover;
 }
 .card:nth-child(5) {
   background: url("imageholder5.jpg") center center/cover;

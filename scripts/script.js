@@ -10,11 +10,15 @@ $(document).ready(function() {
         {
           scrollTop: $(hash).offset().top
         },
-        800,
+        600,
         function() {
           window.location.hash = "";
         }
       );
+      $("nav .active").removeClass("active");
+      $("nav")
+        .find('[href="#' + anchor + '"]')
+        .addClass("active");
     }
   });
 
@@ -43,24 +47,19 @@ $(document).ready(function() {
       .fadeIn(500)
       .css("display", "flex");
   });
-  $(".close").click(function() {
-    var currentImg = $(".current");
-    $(".canvas").fadeOut(500);
-    currentImg.removeClass("current");
-    $(".slider-inner:first-child").addClass("current");
-  });
 
   // carousel
   var imageBox = $(".carousel ul"),
-    imageWidth = $(".carousel ul li")
-      .first()
+    imageWidth = $(".carousel ul")
+      .find("li:nth-child(1)")
       .children("img")
       .width(),
-    imageQuantity = $(".carousel ul").children("li").length,
+    imageQuantity = 3,
     currentImage = 1;
-  console.log(imageWidth);
 
-  imageBox.css("width", imageWidth * imageQuantity);
+  console.log(imageBox);
+
+  //imageBox.css("width", imageWidth * imageQuantity);
 
   function transition(currentImageInput, imageWidthInput) {
     var pxValue = -(currentImageInput - 1) * imageWidthInput;
@@ -84,6 +83,14 @@ $(document).ready(function() {
       transition(currentImage, imageWidth);
     } else {
       currentImage--;
+      transition(currentImage, imageWidth);
+    }
+  });
+
+  $(".close").click(function() {
+    $(".canvas").fadeOut(500);
+    if (currentImage !== 1) {
+      currentImage = 1;
       transition(currentImage, imageWidth);
     }
   });

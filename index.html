@@ -21,10 +21,14 @@
     ></script>
   </head>
   <body>
+    <!--<div id="canvas">
+      <div class="animate"></div>
+    </div>-->
+
     <nav>
       <i class="fas fa-bacon"></i>
-      <ul>
-        <li><span>01.</span> <a href="#home">Home</a></li>
+      <ul class="navbar">
+        <li><span>01.</span> <a href="#home" class="active">Home</a></li>
         <li><span>02.</span> <a href="#about">About</a></li>
         <li><span>03.</span> <a href="#portfolio">Portfolio</a></li>
         <li><span>04.</span> <a href="#contact">Contact</a></li>
@@ -35,7 +39,7 @@
     <div id="mobile-nav" class="flex">
       <button id="close">x</button>
       <ul>
-        <li><span>01.</span> <a href="#home">Home</a></li>
+        <li><span>01.</span> <a href="#home" class="active">Home</a></li>
         <li><span>02.</span> <a href="#about">About</a></li>
         <li><span>03.</span> <a href="#portfolio">Portfolio</a></li>
         <li><span>04.</span> <a href="#contact">Contact</a></li>
@@ -53,11 +57,11 @@
     <section id="home">
       <div class="cover flex">
         <div>
-          <p class="smalltext">Hello, my name is</p>
+          <p class="smalltext intro1">Hello, my name is</p>
 
-          <p class="maintext">Tiffany Tran.</p>
+          <p class="maintext intro2">Tiffany Tran.</p>
 
-          <p class="maintext" style="font-size: 2em;">
+          <p class="maintext intro3" style="font-size: 2em;">
             I am a full-stack web developer.
           </p>
         </div>
@@ -151,9 +155,9 @@
       <div class="card1-open canvas flex">
         <div class="details-card">
           <button class="close">x</button>
-          <div class="carousel">
+          <div id="slider_1" class="carousel">
             <ul>
-              <li><img src="imageholder1.webp" /></li>
+              <li><img src="imageholder6.jpg" /></li>
               <li><img src="imageholder2.jpg" /></li>
               <li><img src="imageholder3.jpg" /></li>
             </ul>
@@ -183,11 +187,19 @@
         </div>
       </div>
 
-      <div class="card2-open canvas">
+      <div class="card2-open canvas flex">
         <div class="details-card">
           <button class="close">x</button>
-          <div class="carousel">
-            <img />
+          <div id="slider_2" class="carousel">
+            <ul>
+              <li><img src="imageholder6.jpg" /></li>
+              <li><img src="imageholder2.jpg" /></li>
+              <li><img src="imageholder3.jpg" /></li>
+            </ul>
+            <div class="slider-outer">
+              <i id="prev" class="fas fa-chevron-left"></i
+              ><i id="next" class="fas fa-chevron-right"></i>
+            </div>
           </div>
           <div class="info">
             <p class="maintext" style="color: rgb(0,0,0);">AI Int</p>
@@ -239,12 +251,17 @@
       </div>
     </section>
 
+    <!-- SCRIPT CDNS -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"
     ></script>
-    <script type="text/javascript" src="script.js"></script>
+    <script src="anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js"></script>
+    <script type="text/javascript" src="scripts/anim.js"></script>
+    <script type="text/javascript" src="scripts/canvas.js"></script>
+    <script type="text/javascript" src="scripts/script.js"></script>
   </body>
   <footer>
     <p>Tiffany Tran © 2020</p>
