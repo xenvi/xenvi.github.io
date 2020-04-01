@@ -84,6 +84,11 @@ a {
 .wrap {
   flex-wrap: wrap;
 }
+.flex-portfolio {
+  align-items: center;
+  display: flex;
+  background: none;
+}
 
 /* CANVAS */
 #canvas {
@@ -268,22 +273,16 @@ p.card-description {
   font-family: "Roboto Mono", monospace;
 }
 .card:nth-child(1) {
-  background: url("images/socialapp.jpg") center center/cover;
-}
-.card:nth-child(2) {
-  background: url("images/landingpg.jpg") center center/cover;
-}
-.card:nth-child(3) {
   background: url("images/ecommerce.png") center center/cover;
 }
-.card:nth-child(4) {
+.card:nth-child(2) {
   background: url("images/realestate.png") center center/cover;
 }
-.card:nth-child(5) {
-  background: url("imageholder5.jpg") center center/cover;
+.card:nth-child(3) {
+  background: url("images/socialapp.jpg") center center/cover;
 }
-.card:nth-child(6) {
-  background: url("imageholder6.jpg") center center/cover;
+.card:nth-child(4) {
+  background: url("images/landingpg.jpg") center center/cover;
 }
 
 .canvas {
@@ -350,13 +349,16 @@ p.card-description {
   position: relative;
   padding: 0;
   margin: 0;
+  display: flex;
 }
 .carousel ul li {
   float: left;
+  text-align: center;
+  list-style: none;
 }
 .carousel ul li img {
   width: 625px;
-  height: 325px;
+  min-height: 325px;
 }
 
 .slider-outer {
@@ -622,5 +624,12 @@ footer > p {
 
   #contact-form {
     width: 90%;
+  }
+  .flex-portfolio {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: none;
   }
 }

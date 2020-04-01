@@ -15,10 +15,6 @@ $(document).ready(function() {
           window.location.hash = "";
         }
       );
-      $("nav .active").removeClass("active");
-      $("nav")
-        .find('[href="#' + anchor + '"]')
-        .addClass("active");
     }
   });
 
@@ -47,54 +43,70 @@ $(document).ready(function() {
       .fadeIn(500)
       .css("display", "flex");
   });
+  $("#card3").click(function() {
+    $(".card3-open")
+      .fadeIn(500)
+      .css("display", "flex");
+  });
+  $("#card4").click(function() {
+    $(".card4-open")
+      .fadeIn(500)
+      .css("display", "flex");
+  });
 
   // carousel
-  var imageBox = $(".carousel ul"),
-    imageWidth = $(".carousel ul")
-      .find("li:nth-child(1)")
-      .children("img")
-      .width(),
-    imageQuantity = 3,
-    currentImage = 1;
+  var carousels = document.querySelectorAll(".carousel");
 
-  console.log(imageBox);
+  [].forEach.call(carousels, function(carousel) {
+    carouselize(carousel);
+  });
+  console.log(carousels);
 
-  //imageBox.css("width", imageWidth * imageQuantity);
+  function carouselize(carousel) {
+    var imageBox = carousel.querySelector(".imageList"),
+      imageWidth = $(imageBox)
+        .find("li:nth-child(1)")
+        .children("img")
+        .width(),
+      imageQuantity = 3,
+      currentImage = 1,
+      carouselNext = carousel.querySelector(".next"),
+      carouselPrev = carousel.querySelector(".prev");
 
-  function transition(currentImageInput, imageWidthInput) {
-    var pxValue = -(currentImageInput - 1) * imageWidthInput;
-    imageBox.animate({
-      left: pxValue
+    function transition(currentImageInput, imageWidthInput) {
+      var pxValue = -(currentImageInput - 1) * imageWidthInput;
+      $(imageBox).animate({
+        left: pxValue
+      });
+    }
+
+    $(carouselNext).click(function() {
+      if (currentImage === imageQuantity) {
+        currentImage = 1;
+        transition(currentImage, imageWidth);
+      } else {
+        currentImage++;
+        transition(currentImage, imageWidth);
+      }
+    });
+    $(carouselPrev).click(function() {
+      if (currentImage === 1) {
+        currentImage = imageQuantity;
+        transition(currentImage, imageWidth);
+      } else {
+        currentImage--;
+        transition(currentImage, imageWidth);
+      }
+    });
+
+    $(".close").click(function() {
+      $(".canvas").fadeOut(500);
+      if (currentImage !== 1) {
+        currentImage = 1;
+        transition(currentImage, imageWidth);
+      }
     });
   }
-
-  $("#next").click(function() {
-    if (currentImage === imageQuantity) {
-      currentImage = 1;
-      transition(currentImage, imageWidth);
-    } else {
-      currentImage++;
-      transition(currentImage, imageWidth);
-    }
-  });
-  $("#prev").click(function() {
-    if (currentImage === 1) {
-      currentImage = imageQuantity;
-      transition(currentImage, imageWidth);
-    } else {
-      currentImage--;
-      transition(currentImage, imageWidth);
-    }
-  });
-
-  $(".close").click(function() {
-    $(".canvas").fadeOut(500);
-    if (currentImage !== 1) {
-      currentImage = 1;
-      transition(currentImage, imageWidth);
-    }
-  });
-
   // send contact form
   $("#contact-form").submit(e => {
     e.preventDefault();

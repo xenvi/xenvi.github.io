@@ -81,7 +81,7 @@
 
     <section id="about">
       <div class="cover flex">
-        <p class="maintext offsetTop">About Me</p>
+        <p class="maintext offsetTop about-title">About Me</p>
         <br /><br />
         <div class="row wrap flex about-container">
           <div>
@@ -122,7 +122,31 @@
       <div class="cover flex">
         <p class="maintext offsetTop">Projects</p>
         <br /><br />
-        <div class="container flex wrap row">
+        <div class="container flex-portfolio wrap row">
+          <div class="card">
+            <div class="card-container flex">
+              <p class="card-title">Luxurity</p>
+              <p class="card-highlight">
+                <span>REACTJS</span> <span>REDUX</span> <span>JAVASCRIPT</span>
+                <span>EXPRESSJS</span>
+                <span>FIREBASE</span> <span>AXIOS</span>
+              </p>
+              <br /><br />
+              <button id="card1" class="mobile-button">Learn more</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-container flex">
+              <p class="card-title">Homely</p>
+              <p class="card-highlight">
+                <span>PHP</span> <span>MYSQL</span> <span>PHPMYADMIN</span>
+                <span>JQUERY</span>
+                <span>BOOTSTRAP</span>
+              </p>
+              <br /><br />
+              <button id="card2" class="mobile-button">Learn more</button>
+            </div>
+          </div>
           <div class="card">
             <div class="card-container flex">
               <p class="card-title">SocialApp</p>
@@ -132,7 +156,7 @@
                 <span>FIREBASE</span> <span>AXIOS</span> <span>EXPRESSJS</span>
               </p>
               <br /><br />
-              <button id="card1" class="mobile-button">Learn more</button>
+              <button id="card3" class="mobile-button">Learn more</button>
             </div>
           </div>
           <div class="card">
@@ -142,13 +166,9 @@
                 <span>JQUERY</span> <span>TWEENMAX</span>
               </p>
               <br /><br />
-              <button id="card2" class="mobile-button">Learn more</button>
+              <button id="card4" class="mobile-button">Learn more</button>
             </div>
           </div>
-          <div class="card"></div>
-          <div class="card"></div>
-          <div class="card"></div>
-          <div class="card"></div>
         </div>
       </div>
 
@@ -156,14 +176,95 @@
         <div class="details-card">
           <button class="close">x</button>
           <div id="slider_1" class="carousel">
-            <ul>
-              <li><img src="imageholder6.jpg" /></li>
-              <li><img src="imageholder2.jpg" /></li>
-              <li><img src="imageholder3.jpg" /></li>
+            <ul class="imageList">
+              <li><img src="images/luxurity1.png" /></li>
+              <li><img src="images/luxurity2.png" /></li>
+              <li><img src="images/luxurity3.png" /></li>
             </ul>
             <div class="slider-outer">
-              <i id="prev" class="fas fa-chevron-left"></i
-              ><i id="next" class="fas fa-chevron-right"></i>
+              <i id="prev" class="fas fa-chevron-left prev"></i
+              ><i id="next" class="fas fa-chevron-right next"></i>
+            </div>
+          </div>
+          <div class="info">
+            <p class="maintext" style="color: rgb(0,0,0);">Luxurity</p>
+            <p class="smalltext" style="font-weight: bold;">
+              E-COMMERCE PLATFORM
+            </p>
+            <hr class="divider" />
+            <p class="card-description">
+              Luxurity is a small business e-commerce site selling dress
+              products. Customers are able to learn more about the company and
+              add items to their cart.
+            </p>
+            <button
+              class="mobile-button active"
+              onclick="window.open('https://luxurity.netlify.com/')"
+            >
+              <i class="fas fa-external-link-alt"></i> View site
+            </button>
+            <button
+              class="mobile-button"
+              onclick="window.open('https://github.com/xenvi/shopping-cart')"
+            >
+              <i class="fab fa-github"></i> Source
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card2-open canvas flex">
+        <div class="details-card">
+          <button class="close">x</button>
+          <div id="slider_2" class="carousel">
+            <ul class="imageList">
+              <li><img src="images/homely1.png" /></li>
+              <li><img src="images/homely2.png" /></li>
+              <li><img src="images/homely3.png" /></li>
+            </ul>
+            <div class="slider-outer">
+              <i id="prev" class="fas fa-chevron-left prev"></i
+              ><i id="next" class="fas fa-chevron-right next"></i>
+            </div>
+          </div>
+          <div class="info">
+            <p class="maintext" style="color: rgb(0,0,0);">Homely</p>
+            <p class="smalltext" style="font-weight: bold;">
+              MOCK REALESTATE SITE
+            </p>
+            <hr class="divider" />
+            <p class="card-description">
+              Homely is a realestate platform where users can find homes for
+              rent or purchase, or create their own listings accessible to other
+              users.
+            </p>
+            <button
+              class="mobile-button active"
+              onclick="window.open('http://homely.epizy.com/main.php')"
+            >
+              <i class="fas fa-external-link-alt"></i> View site
+            </button>
+            <button
+              class="mobile-button"
+              onclick="window.open('https://github.com/xenvi/mock-realestate-site')"
+            >
+              <i class="fab fa-github"></i> Source
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card3-open canvas flex">
+        <div class="details-card">
+          <button class="close">x</button>
+          <div id="slider_3" class="carousel">
+            <ul class="imageList">
+              <li><img src="images/socialapp1.png" /></li>
+              <li><img src="images/socialapp2.png" /></li>
+              <li><img src="images/socialapp3.png" /></li>
+            </ul>
+            <div class="slider-outer">
+              <i id="prev" class="fas fa-chevron-left prev"></i
+              ><i id="next" class="fas fa-chevron-right next"></i>
             </div>
           </div>
           <div class="info">
@@ -177,29 +278,29 @@
               create posts, edit their profiles, and interact with other posts
               via likes/comments.
             </p>
-            <button class="mobile-button active">
+            <button
+              class="mobile-button active"
+              onclick="window.open('https://socialapp-79173.firebaseapp.com/')"
+            >
               <i class="fas fa-external-link-alt"></i> View site
             </button>
-            <button class="mobile-button">
+            <button
+              class="mobile-button"
+              onclick="window.open('https://github.com/xenvi/socialapp-client')"
+            >
               <i class="fab fa-github"></i> Source
             </button>
           </div>
         </div>
       </div>
 
-      <div class="card2-open canvas flex">
+      <div class="card4-open canvas flex">
         <div class="details-card">
           <button class="close">x</button>
-          <div id="slider_2" class="carousel">
+          <div id="slider_4" class="carousel">
             <ul>
-              <li><img src="imageholder6.jpg" /></li>
-              <li><img src="imageholder2.jpg" /></li>
-              <li><img src="imageholder3.jpg" /></li>
+              <li><img src="images/ai-gif.gif" /></li>
             </ul>
-            <div class="slider-outer">
-              <i id="prev" class="fas fa-chevron-left"></i
-              ><i id="next" class="fas fa-chevron-right"></i>
-            </div>
           </div>
           <div class="info">
             <p class="maintext" style="color: rgb(0,0,0);">AI Int</p>
@@ -212,10 +313,16 @@
               technological innovations. It feautures modern UI/UX and sleek
               animations.
             </p>
-            <button class="mobile-button active">
+            <button
+              class="mobile-button active"
+              onclick="window.open('https://xenvi.github.io/ai-intelligence/')"
+            >
               <i class="fas fa-external-link-alt"></i> View site
             </button>
-            <button class="mobile-button">
+            <button
+              class="mobile-button"
+              onclick="window.open('https://github.com/xenvi/ai-intelligence')"
+            >
               <i class="fab fa-github"></i> Source
             </button>
           </div>
@@ -257,7 +364,6 @@
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"
     ></script>
-    <script src="anime.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js"></script>
     <script type="text/javascript" src="scripts/anim.js"></script>
     <script type="text/javascript" src="scripts/canvas.js"></script>

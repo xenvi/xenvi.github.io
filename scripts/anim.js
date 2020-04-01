@@ -8,6 +8,16 @@ $(document).ready(function() {
     isMobile = true;
   }
 
+  $.fn.isInViewport = function() {
+    let elementTop = $(this).offset().top;
+    let elementBottom = elementTop + $(this).outerHeight();
+
+    let viewportTop = $(window).scrollTop();
+    let viewportBottom = viewportTop + $(window).height();
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+  };
+
   $(window).on("scroll", function() {
     var pos = $(window).scrollTop();
     var pos2 = pos + 75;
@@ -32,8 +42,12 @@ $(document).ready(function() {
     if (pos2 > $("#contact").offset().top) {
       highlightLink("contact");
     }
-
-    if ($("#about").offset().top > scrollBottom) {
+    if ($("#about").isInViewport()) {
+      gsap.from(".about-title", {
+        opacity: 0,
+        y: 10,
+        duration: 2
+      });
     }
   });
 
