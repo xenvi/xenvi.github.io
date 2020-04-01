@@ -33,22 +33,22 @@ $(document).ready(function() {
     }
   );
 
-  $("#card1").click(function() {
+  $("#card1").click(() => {
     $(".card1-open")
       .fadeIn(500)
       .css("display", "flex");
   });
-  $("#card2").click(function() {
+  $("#card2").click(() => {
     $(".card2-open")
       .fadeIn(500)
       .css("display", "flex");
   });
-  $("#card3").click(function() {
+  $("#card3").click(() => {
     $(".card3-open")
       .fadeIn(500)
       .css("display", "flex");
   });
-  $("#card4").click(function() {
+  $("#card4").click(() => {
     $(".card4-open")
       .fadeIn(500)
       .css("display", "flex");
