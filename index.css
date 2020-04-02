@@ -296,7 +296,9 @@ p.card-description {
   z-index: 100;
 }
 .card1-open,
-.card2-open {
+.card2-open,
+.card3-open,
+.card4-open {
   display: none;
 }
 .details-card {
