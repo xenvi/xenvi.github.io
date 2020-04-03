@@ -42,13 +42,6 @@ $(document).ready(function() {
     if (pos2 > $("#contact").offset().top) {
       highlightLink("contact");
     }
-    if ($("#about").isInViewport()) {
-      gsap.from(".about-title", {
-        opacity: 0,
-        y: 10,
-        duration: 2
-      });
-    }
   });
 
   // HOME PAGE //

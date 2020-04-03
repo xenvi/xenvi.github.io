@@ -25,7 +25,12 @@ html,
 a {
   text-decoration: none;
 }
-
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 .button {
   border: 1px solid rgb(255, 119, 119);
   padding: 0.5em 1em 0.6em 1em;
@@ -42,7 +47,7 @@ a {
   text-shadow: 0 2.5px 10px rgb(141, 4, 4);
 }
 .offsetTop {
-  margin-top: 80px;
+  margin-top: 40px;
 }
 
 .display {
@@ -90,22 +95,6 @@ a {
   background: none;
 }
 
-/* CANVAS */
-#canvas {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  z-index: 100;
-  background: none;
-}
-.animate {
-  width: 0;
-  height: 0;
-  /* background: #fff;*/
-}
-
 /* NAV BAR */
 nav {
   position: fixed;
@@ -142,7 +131,7 @@ nav > ul > li > span {
 
 /* HOME PAGE */
 #home {
-  padding: 0 1em;
+  padding: 0 2em;
 }
 .smalltext {
   font-family: "Roboto Mono", monospace;
@@ -154,6 +143,11 @@ nav > ul > li > span {
   font-weight: bold;
   font-size: 3em;
   letter-spacing: 0.1em;
+}
+
+.reposition {
+  position: absolute;
+  top: 0;
 }
 
 .subtext {
@@ -188,6 +182,7 @@ nav > ul > li > span {
   display: flex;
   flex-direction: column;
   background: none;
+  z-index: 1;
 }
 .media-icons > a > i {
   font-size: 1.8em;
@@ -430,6 +425,7 @@ p.card-description {
   margin: 0 auto;
   width: 500px;
   padding: 1em;
+  background: none;
 }
 
 input,
@@ -478,12 +474,14 @@ textarea:focus {
 }
 /* FOOTER */
 footer {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgb(39, 40, 58);
   height: 8em;
   border-top: 2px solid rgb(255, 119, 119);
+  width: 100%;
 }
 footer > p {
   background: none;
@@ -626,6 +624,8 @@ footer > p {
 
   #contact-form {
     width: 90%;
+
+    background: none;
   }
   .flex-portfolio {
     align-items: center;
