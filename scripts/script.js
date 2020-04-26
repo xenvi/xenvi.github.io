@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
   // smooth scroll
-  $("a").click(function(event) {
+  $("a").click(function (event) {
     if (this.hash !== "") {
       event.preventDefault();
 
@@ -8,66 +8,54 @@ $(document).ready(function() {
 
       $("html, body").animate(
         {
-          scrollTop: $(hash).offset().top
+          scrollTop: $(hash).offset().top,
         },
         600,
-        function() {
+        function () {
           window.location.hash = "";
         }
       );
     }
   });
 
-  $("#nav-hamburger").click(function() {
+  $("#nav-hamburger").click(function () {
     $("#mobile-nav").addClass("slide");
   });
-  $("#close").click(function() {
+  $("#close").click(function () {
     $("#mobile-nav").removeClass("slide");
   });
   $(".card-container").hover(
-    function() {
+    function () {
       $(this).addClass("fadeIn");
     },
-    function() {
+    function () {
       $(this).removeClass("fadeIn");
     }
   );
 
-  $("#card1").click(function() {
-    $(".card1-open")
-      .fadeIn(500)
-      .css("display", "flex");
+  $("#card1").click(function () {
+    $(".card1-open").fadeIn(500).css("display", "flex");
   });
-  $("#card2").click(function() {
-    $(".card2-open")
-      .fadeIn(500)
-      .css("display", "flex");
+  $("#card2").click(function () {
+    $(".card2-open").fadeIn(500).css("display", "flex");
   });
-  $("#card3").click(function() {
-    $(".card3-open")
-      .fadeIn(500)
-      .css("display", "flex");
+  $("#card3").click(function () {
+    $(".card3-open").fadeIn(500).css("display", "flex");
   });
-  $("#card4").click(function() {
-    $(".card4-open")
-      .fadeIn(500)
-      .css("display", "flex");
+  $("#card4").click(function () {
+    $(".card4-open").fadeIn(500).css("display", "flex");
   });
 
   // carousel
   var carousels = document.querySelectorAll(".carousel");
 
-  [].forEach.call(carousels, function(carousel) {
+  [].forEach.call(carousels, function (carousel) {
     carouselize(carousel);
   });
-  console.log(carousels);
 
   function carouselize(carousel) {
     var imageBox = carousel.querySelector(".imageList"),
-      imageWidth = $(imageBox)
-        .find("li:nth-child(1)")
-        .children("img")
-        .width(),
+      imageWidth = $(imageBox).find("li:nth-child(1)").children("img").width(),
       imageQuantity = 3,
       currentImage = 1,
       carouselNext = carousel.querySelector(".next"),
@@ -76,11 +64,11 @@ $(document).ready(function() {
     function transition(currentImageInput, imageWidthInput) {
       var pxValue = -(currentImageInput - 1) * imageWidthInput;
       $(imageBox).animate({
-        left: pxValue
+        left: pxValue,
       });
     }
 
-    $(carouselNext).click(function() {
+    $(carouselNext).click(function () {
       if (currentImage === imageQuantity) {
         currentImage = 1;
         transition(currentImage, imageWidth);
@@ -89,7 +77,7 @@ $(document).ready(function() {
         transition(currentImage, imageWidth);
       }
     });
-    $(carouselPrev).click(function() {
+    $(carouselPrev).click(function () {
       if (currentImage === 1) {
         currentImage = imageQuantity;
         transition(currentImage, imageWidth);
@@ -99,7 +87,7 @@ $(document).ready(function() {
       }
     });
 
-    $(".close").click(function() {
+    $(".close").click(function () {
       $(".canvas").fadeOut(500);
       if (currentImage !== 1) {
         currentImage = 1;
@@ -108,15 +96,15 @@ $(document).ready(function() {
     });
   }
   // send contact form
-  $("#contact-form").submit(e => {
+  $("#contact-form").submit((e) => {
     e.preventDefault();
 
     $.ajax({
       url: "https://formspree.io/mnqdjjrk",
       method: "POST",
       data: { message: $("form").serialize() },
-      dataType: "json"
-    }).done(res => {
+      dataType: "json",
+    }).done((res) => {
       $("#success").addClass("reveal");
       $("#contact-form")
         .find("input[type=text], input[type=email], textarea")

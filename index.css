@@ -91,6 +91,7 @@ a {
 }
 .flex-portfolio {
   align-items: center;
+  justify-content: center;
   display: flex;
   background: none;
 }
@@ -137,12 +138,14 @@ nav > ul > li > span {
   font-family: "Roboto Mono", monospace;
   font-size: 1em;
   color: rgb(255, 119, 119);
+  background: none;
 }
 
 .maintext {
   font-weight: bold;
   font-size: 3em;
   letter-spacing: 0.1em;
+  background: none;
 }
 
 .reposition {
