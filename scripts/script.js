@@ -95,17 +95,16 @@ $(document).ready(function () {
       window.history.back();
     });
 
-    $(document).mouseup((e) => {
-      // if click outside details card and its descendents, hide popup
-      if (
-        !$(".details-card").is(e.target) &&
-        $(".details-card").has(e.target).length === 0
-      ) {
-        window.history.back();
-      }
-    });
-
     $(window).on("hashchange", function () {
+      $(document).mouseup((e) => {
+        // if click outside details card and its descendents, hide popup
+        if (
+          !$(".details-card").is(e.target) &&
+          $(".details-card").has(e.target).length === 0
+        ) {
+          window.history.back();
+        }
+      });
       if (window.location.hash === "") {
         $(".canvas").fadeOut(500);
         if (currentImage !== 1) {
