@@ -35,15 +35,19 @@ $(document).ready(function () {
 
   $("#card1").click(function () {
     $(".card1-open").fadeIn(500).css("display", "flex");
+    window.location.hash = "luxurity-card";
   });
   $("#card2").click(function () {
     $(".card2-open").fadeIn(500).css("display", "flex");
+    window.location.hash = "homely-card";
   });
   $("#card3").click(function () {
     $(".card3-open").fadeIn(500).css("display", "flex");
+    window.location.hash = "chatsy-card";
   });
   $("#card4").click(function () {
     $(".card4-open").fadeIn(500).css("display", "flex");
+    window.location.hash = "ai-intelligence-card";
   });
 
   // carousel
@@ -88,10 +92,26 @@ $(document).ready(function () {
     });
 
     $(".close").click(function () {
-      $(".canvas").fadeOut(500);
-      if (currentImage !== 1) {
-        currentImage = 1;
-        transition(currentImage, imageWidth);
+      window.history.back();
+    });
+
+    $(document).mouseup((e) => {
+      // if click outside details card and its descendents, hide popup
+      if (
+        !$(".details-card").is(e.target) &&
+        $(".details-card").has(e.target).length === 0
+      ) {
+        window.history.back();
+      }
+    });
+
+    $(window).on("hashchange", function () {
+      if (window.location.hash === "") {
+        $(".canvas").fadeOut(500);
+        if (currentImage !== 1) {
+          currentImage = 1;
+          transition(currentImage, imageWidth);
+        }
       }
     });
   }

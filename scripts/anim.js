@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   var isMobile;
   if (
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -8,7 +8,7 @@ $(document).ready(function() {
     isMobile = true;
   }
 
-  $.fn.isInViewport = function() {
+  $.fn.isInViewport = function () {
     let elementTop = $(this).offset().top;
     let elementBottom = elementTop + $(this).outerHeight();
 
@@ -18,7 +18,7 @@ $(document).ready(function() {
     return elementBottom > viewportTop && elementTop < viewportBottom;
   };
 
-  $(window).on("scroll", function() {
+  $(window).on("scroll", function () {
     var pos = $(window).scrollTop();
     var pos2 = pos + 75;
     var scrollBottom = pos + $(window).height();
@@ -50,45 +50,45 @@ $(document).ready(function() {
     opacity: 0,
     x: 10,
     duration: 0.6,
-    delay: 0
+    delay: 0,
   });
   gsap.from(".intro2", {
     opacity: 0,
     x: 10,
     duration: 1,
-    delay: 0.7
+    delay: 0.7,
   });
   gsap.from(".intro3", {
     opacity: 0,
     x: 10,
     duration: 0.8,
-    delay: 1.7
+    delay: 1.7,
   });
   gsap.from(".fa-github", {
     rotation: 360,
     opacity: 0,
     y: 10,
     duration: 0.5,
-    delay: 2.5
+    delay: 2.5,
   });
   gsap.from(".fa-linkedin-in", {
     rotation: 360,
     opacity: 0,
     y: 10,
     duration: 0.5,
-    delay: 3
+    delay: 3,
   });
   gsap.from(".navbar", {
     opacity: 0,
     y: 10,
     duration: 0.5,
-    delay: 3.5
+    delay: 3.5,
   });
   gsap.from(".arrow-down", {
     opacity: 0,
     y: 20,
     ease: "bounce",
     duration: 1,
-    delay: 4
+    delay: 4,
   });
 });
