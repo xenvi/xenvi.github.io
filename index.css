@@ -18,7 +18,7 @@ html,
 }
 .container {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1220px;
   width: 100%;
   height: auto;
 }
@@ -232,6 +232,7 @@ nav > ul > li > span {
 .card {
   width: 390px;
   height: 320px;
+  margin: 0.5em;
 }
 .card-container {
   opacity: 0;

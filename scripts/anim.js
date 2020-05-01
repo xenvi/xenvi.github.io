@@ -44,51 +44,43 @@ $(document).ready(function () {
     }
   });
 
-  // HOME PAGE //
-
-  gsap.from(".intro1", {
+  var tl = gsap.timeline();
+  tl.from(".intro1", {
     opacity: 0,
     x: 10,
     duration: 0.6,
-    delay: 0,
   });
-  gsap.from(".intro2", {
+  tl.from(".intro2", {
     opacity: 0,
     x: 10,
     duration: 1,
-    delay: 0.7,
   });
-  gsap.from(".intro3", {
+  tl.from(".intro3", {
     opacity: 0,
     x: 10,
     duration: 0.8,
-    delay: 1.7,
   });
-  gsap.from(".fa-github", {
+  tl.from(".fa-github", {
     rotation: 360,
     opacity: 0,
     y: 10,
     duration: 0.5,
-    delay: 2.5,
   });
-  gsap.from(".fa-linkedin-in", {
+  tl.from(".fa-linkedin-in", {
     rotation: 360,
     opacity: 0,
     y: 10,
     duration: 0.5,
-    delay: 3,
   });
-  gsap.from(".navbar", {
+  tl.from(".navbar", {
     opacity: 0,
     y: 10,
     duration: 0.5,
-    delay: 3.5,
   });
-  gsap.from(".arrow-down", {
+  tl.from(".arrow-down", {
     opacity: 0,
     y: 20,
     ease: "bounce",
     duration: 1,
-    delay: 4,
   });
 });
