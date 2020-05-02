@@ -8,7 +8,7 @@ $(document).ready(function () {
 
       $("html, body").animate(
         {
-          scrollTop: $(hash).offset().top,
+          scrollTop: $(hash).offset().top - 40,
         },
         600,
         function () {
@@ -21,7 +21,7 @@ $(document).ready(function () {
   $("#nav-hamburger").click(function () {
     $("#mobile-nav").addClass("slide");
   });
-  $("#close").click(function () {
+  $("#close, .mobile-link").click(function () {
     $("#mobile-nav").removeClass("slide");
   });
   $(".card-container").hover(
@@ -110,6 +110,14 @@ $(document).ready(function () {
           $(".details-card").has(e.target).length === 0
         ) {
           closePopup();
+        }
+
+        // if click outside mobile navbar and its descendents, hide popup
+        if (
+          !$("#mobile-nav").is(e.target) &&
+          $("#mobile-nav").has(e.target).length === 0
+        ) {
+          $("#mobile-nav").removeClass("slide");
         }
       });
   }

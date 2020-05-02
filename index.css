@@ -63,7 +63,7 @@ a {
   transition: opacity 0.4s ease-in-out;
 }
 .slide {
-  transform: translateX(-140%);
+  transform: translateX(-200%);
   transition: 1s;
 }
 .fadeIn {
@@ -499,17 +499,22 @@ footer > p {
   display: none;
 }
 #mobile-nav {
-  display: flex;
   position: fixed;
   z-index: 2;
   top: 0;
   right: -100%;
   height: 100%;
-  width: 70%;
+  width: 50%;
   background: #fff;
   border-bottom-left-radius: 25%;
   box-shadow: 0 0 10px rgb(27, 24, 78);
   transition: 1s;
+}
+#mobile-nav > ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: none;
 }
 #mobile-nav > ul > li,
 #mobile-nav > ul > li > span,
@@ -517,7 +522,7 @@ footer > p {
 .mobile-button {
   background: #fff;
   color: #000;
-  font-size: 1.15em;
+  font-size: 1.05em;
 
   font-family: "Roboto Mono", monospace;
 }
@@ -539,7 +544,7 @@ footer > p {
   text-shadow: 0 5px 10px rgb(121, 0, 0);
 }
 #mobile-nav > ul > li {
-  padding-top: 1em;
+  padding-bottom: 1em;
 }
 #mobile-nav > ul > li > span {
   color: rgb(255, 119, 119);
@@ -550,6 +555,52 @@ footer > p {
 #mobile-nav > ul > li > a:hover {
   color: rgb(255, 119, 119);
   transition: color 0.2s ease-in-out;
+}
+
+#close {
+  background: none;
+  color: rgb(255, 119, 119);
+  border: none;
+  font-weight: bold;
+  font-size: 2em;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  line-height: 100%;
+  margin: 10px;
+
+  transition: font-size 0.1s;
+}
+#close:hover {
+  cursor: pointer;
+  font-size: 2.3em;
+  transition: font-size 0.1s;
+}
+#close:focus {
+  outline: none;
+}
+.mobile-icons {
+  background: none;
+  margin-top: 5em;
+}
+.mobile-icons > a {
+  background: none;
+}
+.mobile-icons > a > i {
+  background: none;
+  color: #000;
+  font-size: 1.75em;
+  margin: 1em 0.5em;
+  transition: 0.4s ease-in-out;
+}
+.mobile-icons > a > i:hover {
+  transform: rotate(360deg);
+
+  color: rgb(255, 119, 119);
+  transition: 0.4s ease-in-out;
 }
 
 @media only screen and (max-width: 600px) {
@@ -571,52 +622,6 @@ footer > p {
 
   .media-icons {
     display: none;
-  }
-  .mobile-icons {
-    display: block;
-    background: none;
-    margin-top: 5em;
-  }
-  .mobile-icons > a {
-    background: none;
-  }
-  .mobile-icons > a > i {
-    background: none;
-    color: #000;
-    font-size: 1.75em;
-    margin: 1em 0.5em;
-    transition: 0.4s ease-in-out;
-  }
-  .mobile-icons > a > i:hover {
-    transform: rotate(360deg);
-
-    color: rgb(255, 119, 119);
-    transition: 0.4s ease-in-out;
-  }
-  #close {
-    background: none;
-    color: rgb(255, 119, 119);
-    border: none;
-    font-weight: bold;
-    font-size: 2em;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    line-height: 100%;
-    margin: 10px;
-
-    transition: font-size 0.1s;
-  }
-  #close:hover {
-    cursor: pointer;
-    font-size: 2.3em;
-    transition: font-size 0.1s;
-  }
-  #close:focus {
-    outline: none;
   }
 
   .card {

@@ -23,12 +23,12 @@
   <body>
     <div id="particles-js"></div>
 
-    <nav>
+    <nav id="nav">
       <i class="fas fa-bacon"></i>
       <ul class="navbar">
         <li><span>01.</span> <a href="#home" class="active">Home</a></li>
         <li><span>02.</span> <a href="#about">About</a></li>
-        <li><span>03.</span> <a href="#portfolio">Portfolio</a></li>
+        <li><span>03.</span> <a href="#projects">Projects</a></li>
         <li><span>04.</span> <a href="#contact">Contact</a></li>
         <li>
           <button class="button" onclick="window.open('images/Resume.pdf')">
@@ -38,13 +38,19 @@
       </ul>
       <i id="nav-hamburger" class="fas fa-bars"></i>
     </nav>
-    <div id="mobile-nav" class="flex">
+    <nav id="mobile-nav" class="flex">
       <button id="close">x</button>
       <ul>
-        <li><span>01.</span> <a href="#home" class="active">Home</a></li>
-        <li><span>02.</span> <a href="#about">About</a></li>
-        <li><span>03.</span> <a href="#portfolio">Portfolio</a></li>
-        <li><span>04.</span> <a href="#contact">Contact</a></li>
+        <li>
+          <span>01.</span> <a href="#home" class="active mobile-link">Home</a>
+        </li>
+        <li><span>02.</span> <a href="#about" class="mobile-link">About</a></li>
+        <li>
+          <span>03.</span> <a href="#projects" class="mobile-link">Projects</a>
+        </li>
+        <li>
+          <span>04.</span> <a href="#contact" class="mobile-link">Contact</a>
+        </li>
         <li>
           <button
             class="mobile-button"
@@ -61,7 +67,7 @@
           ><i class="fab fa-linkedin-in"></i
         ></a>
       </div>
-    </div>
+    </nav>
 
     <section id="home">
       <div class="cover flex">
@@ -126,7 +132,7 @@
       </div>
     </section>
 
-    <section id="portfolio">
+    <section id="projects">
       <div class="cover flex">
         <p class="maintext offsetTop">Projects</p>
         <br /><br />
