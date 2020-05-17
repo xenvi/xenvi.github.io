@@ -21,6 +21,7 @@ $(document).ready(function () {
   $(window).on("scroll", function () {
     var pos = $(window).scrollTop();
     var pos2 = pos + 75;
+    var pos3 = pos + $(window).height() / 9;
     var bottompos = pos + $(window).height();
     var bottompos2 = pos + $(window).height() / 3;
 
@@ -62,17 +63,30 @@ $(document).ready(function () {
         $(text).removeClass("hidden");
       });
     }
+    if (pos > $("#about").offset().top) {
+      $(".svg").each((i, svg) => {
+        $(svg).removeClass("rotate-element");
+      });
+    }
 
     if (bottompos2 > $("#projects").offset().top) {
       $(".card").each((i, card) => {
         $(card).addClass("fade-in-element");
         $(card).removeClass("hidden");
       });
+      $(".projectsTitle").addClass("pulse-element");
+    }
+    if (pos > $("#projects").offset().top) {
+      $(".projectsTitle").removeClass("pulse-element");
     }
 
     if (bottompos2 > $("#contact").offset().top) {
       $("#contact-form").addClass("fade-in-element");
       $("#contact-form").removeClass("hidden");
+      $(".contactText").addClass("pulse-element");
+    }
+    if (pos > $("#contact").offset().top) {
+      $(".contactText").removeClass("pulse-element");
     }
   });
 
