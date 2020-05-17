@@ -272,13 +272,13 @@ p.card-description {
   font-family: "Roboto Mono", monospace;
 }
 .card:nth-child(1) {
-  background: url("images/ecommerce.png") center center/cover;
+  background: url("images/socialapp.jpg") center center/cover;
 }
 .card:nth-child(2) {
-  background: url("images/realestate.png") center center/cover;
+  background: url("images/ecommerce.png") center center/cover;
 }
 .card:nth-child(3) {
-  background: url("images/socialapp.jpg") center center/cover;
+  background: url("images/realestate.png") center center/cover;
 }
 .card:nth-child(4) {
   background: url("images/landingpg.jpg") center center/cover;
