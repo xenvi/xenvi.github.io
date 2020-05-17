@@ -1,7 +1,6 @@
 body,
 html,
 * {
-  background: rgb(44, 45, 65);
   box-sizing: border-box;
   scroll-behavior: smooth;
   margin: 0;
@@ -26,13 +25,19 @@ a {
   text-decoration: none;
 }
 #particles-js {
-  position: absolute;
+  z-index: 0;
+  position: fixed;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background: rgb(44, 45, 65);
+}
+#contentWrapper {
+  z-index: 100;
 }
 .button {
   border: 1px solid rgb(255, 119, 119);
+  background: rgb(44, 45, 65);
   padding: 0.5em 1em 0.6em 1em;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
@@ -54,9 +59,7 @@ a {
   display: flex !important;
 }
 .hidden {
-  height: 0;
-  padding: 0;
-  transition: 0.3s;
+  opacity: 0;
 }
 .reveal {
   opacity: 1 !important;
@@ -73,6 +76,59 @@ a {
 .hide {
   right: -100%;
   transition: 1s;
+}
+
+/* animations */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9, 0.9);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fade-up-far {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes rotate {
+  from {
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in-element {
+  animation: fade-in 1.4s;
+}
+.fade-up-element {
+  animation: fade-up 1.4s;
+}
+.fade-up-far-element {
+  animation: fade-up-far 1.4s;
+}
+.rotate-element {
+  animation: rotate 1.4s;
 }
 
 /* flex classes */
@@ -94,6 +150,7 @@ a {
   justify-content: center;
   display: flex;
   background: none;
+  z-index: 100;
 }
 
 /* NAV BAR */
@@ -107,7 +164,8 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   box-shadow: 0 10px 30px rgb(39, 41, 68);
-  z-index: 1;
+  background: rgb(44, 45, 65);
+  z-index: 120;
   font-family: "Roboto Mono", monospace;
 }
 nav > i {
@@ -139,6 +197,7 @@ nav > ul > li > span {
   font-size: 1em;
   color: rgb(255, 119, 119);
   background: none;
+  z-index: 100;
 }
 
 .maintext {
@@ -146,6 +205,7 @@ nav > ul > li > span {
   font-size: 3em;
   letter-spacing: 0.1em;
   background: none;
+  z-index: 100;
 }
 
 .reposition {
@@ -207,10 +267,12 @@ nav > ul > li > span {
 /* ABOUT PAGE */
 .about-container {
   text-align: center;
+  z-index: 100;
 }
 .about-container > div {
   width: 20em;
   margin: 0 1.5em 3em 1.5em;
+  overflow: visible;
 }
 .about-container > div > img {
   width: 14em;
@@ -292,7 +354,7 @@ p.card-description {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 100;
+  z-index: 150;
 }
 .card1-open,
 .card2-open,
@@ -430,6 +492,7 @@ p.card-description {
   width: 500px;
   padding: 1em;
   background: none;
+  z-index: 100;
 }
 
 input,

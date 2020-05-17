@@ -21,7 +21,8 @@ $(document).ready(function () {
   $(window).on("scroll", function () {
     var pos = $(window).scrollTop();
     var pos2 = pos + 75;
-    var scrollBottom = pos + $(window).height();
+    var bottompos = pos + $(window).height();
+    var bottompos2 = pos + $(window).height() / 3;
 
     function highlightLink(anchor) {
       $("nav .active").removeClass("active");
@@ -29,6 +30,7 @@ $(document).ready(function () {
         .find('[href="#' + anchor + '"]')
         .addClass("active");
     }
+
     // active link highlight
     if (pos2 > $("#home").offset().top) {
       highlightLink("home");
@@ -41,6 +43,36 @@ $(document).ready(function () {
     }
     if (pos2 > $("#contact").offset().top) {
       highlightLink("contact");
+    }
+
+    // animate section elements
+    if (bottompos2 > $("#about").offset().top) {
+      // rotate svgs
+      $(".svg").each((i, svg) => {
+        $(svg).addClass("rotate-element");
+        $(svg).removeClass("hidden");
+      });
+      // fade up text
+      $(".aboutMainText").each((i, text) => {
+        $(text).addClass("fade-up-element");
+        $(text).removeClass("hidden");
+      });
+      $(".aboutSmallText").each((i, text) => {
+        $(text).addClass("fade-up-far-element");
+        $(text).removeClass("hidden");
+      });
+    }
+
+    if (bottompos2 > $("#projects").offset().top) {
+      $(".card").each((i, card) => {
+        $(card).addClass("fade-in-element");
+        $(card).removeClass("hidden");
+      });
+    }
+
+    if (bottompos2 > $("#contact").offset().top) {
+      $("#contact-form").addClass("fade-in-element");
+      $("#contact-form").removeClass("hidden");
     }
   });
 

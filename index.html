@@ -23,355 +23,381 @@
   <body>
     <div id="particles-js"></div>
 
-    <nav id="nav">
-      <i class="fas fa-bacon"></i>
-      <ul class="navbar">
-        <li><span>01.</span> <a href="#home" class="active">Home</a></li>
-        <li><span>02.</span> <a href="#about">About</a></li>
-        <li><span>03.</span> <a href="#projects">Projects</a></li>
-        <li><span>04.</span> <a href="#contact">Contact</a></li>
-        <li>
-          <button class="button" onclick="window.open('images/Resume.pdf')">
-            Resume
-          </button>
-        </li>
-      </ul>
-      <i id="nav-hamburger" class="fas fa-bars"></i>
-    </nav>
-    <nav id="mobile-nav" class="flex">
-      <button id="close">x</button>
-      <ul>
-        <li>
-          <span>01.</span> <a href="#home" class="active mobile-link">Home</a>
-        </li>
-        <li><span>02.</span> <a href="#about" class="mobile-link">About</a></li>
-        <li>
-          <span>03.</span> <a href="#projects" class="mobile-link">Projects</a>
-        </li>
-        <li>
-          <span>04.</span> <a href="#contact" class="mobile-link">Contact</a>
-        </li>
-        <li>
-          <button
-            class="mobile-button"
-            onclick="window.open('images/Resume.pdf')"
+    <div id="contentWrapper">
+      <nav id="nav">
+        <i class="fas fa-bacon"></i>
+        <ul class="navbar">
+          <li><span>01.</span> <a href="#home" class="active">Home</a></li>
+          <li><span>02.</span> <a href="#about">About</a></li>
+          <li><span>03.</span> <a href="#projects">Projects</a></li>
+          <li><span>04.</span> <a href="#contact">Contact</a></li>
+          <li>
+            <button class="button" onclick="window.open('images/Resume.pdf')">
+              Resume
+            </button>
+          </li>
+        </ul>
+        <i id="nav-hamburger" class="fas fa-bars"></i>
+      </nav>
+      <nav id="mobile-nav" class="flex">
+        <button id="close">x</button>
+        <ul>
+          <li>
+            <span>01.</span> <a href="#home" class="active mobile-link">Home</a>
+          </li>
+          <li>
+            <span>02.</span> <a href="#about" class="mobile-link">About</a>
+          </li>
+          <li>
+            <span>03.</span>
+            <a href="#projects" class="mobile-link">Projects</a>
+          </li>
+          <li>
+            <span>04.</span> <a href="#contact" class="mobile-link">Contact</a>
+          </li>
+          <li>
+            <button
+              class="mobile-button"
+              onclick="window.open('images/Resume.pdf')"
+            >
+              Resume
+            </button>
+          </li>
+        </ul>
+
+        <div class="mobile-icons">
+          <a href="https://github.com/xenvi"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/tiffanytranx/"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+        </div>
+      </nav>
+
+      <section id="home">
+        <div class="cover flex">
+          <div>
+            <p class="smalltext intro1">Hello, my name is</p>
+
+            <p class="maintext intro2">Tiffany Tran.</p>
+
+            <p class="maintext intro3" style="font-size: 2em;">
+              I am a full-stack web developer.
+            </p>
+          </div>
+        </div>
+        <div class="arrow-down">
+          <p>Learn more</p>
+          <a href="#about"><i class="fas fa-chevron-down"></i></a>
+        </div>
+        <div class="media-icons">
+          <a href="https://github.com/xenvi"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/tiffanytranx/"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="cover flex">
+          <p class="maintext offsetTop about-title">About Me</p>
+          <br /><br />
+          <div class="row wrap flex about-container">
+            <div>
+              <img src="images/results.svg" alt="results" class="svg hidden" />
+              <p
+                class="maintext aboutMainText hidden"
+                style="font-size: 2em; padding-bottom: 0.2em;"
+              >
+                Results-driven
+              </p>
+              <p class="smalltext aboutSmallText hidden">
+                Each one of my projects are created with efficiency and
+                <br />above satisfactory results in mind.
+              </p>
+            </div>
+            <div>
+              <img src="images/heart.svg" alt="heart" class="svg hidden" />
+              <p
+                class="maintext aboutMainText hidden"
+                style="font-size: 2em; padding-bottom: 0.2em;"
+              >
+                Passion to Learn
+              </p>
+              <p class="smalltext aboutSmallText hidden">
+                I enjoy indulging in complex and unfamiliar code during my free
+                time. Each new day is an opportunity to learn.
+              </p>
+            </div>
+            <div>
+              <img src="images/dynamic.svg" alt="dynamic" class="svg hidden" />
+              <p
+                class="maintext aboutMainText hidden"
+                style="font-size: 2em; padding-bottom: 0.2em;"
+              >
+                Dynamic
+              </p>
+              <p class="smalltext aboutSmallText hidden">
+                I strongly believe in creating simple but powerful UI designs
+                that will bring any static page to life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="cover flex">
+          <p class="maintext offsetTop">Projects</p>
+          <br /><br />
+          <div class="container flex-portfolio wrap row">
+            <div class="card hidden">
+              <div class="card-container flex">
+                <p class="card-title">Chatsy</p>
+                <p class="card-highlight">
+                  <span>REACTJS</span> <span>REDUX</span>
+                  <span>JAVASCRIPT</span>
+                  <span>MATERIAL-UI</span>
+                  <span>FIREBASE</span> <span>AXIOS</span>
+                  <span>EXPRESSJS</span>
+                  <span>NEWS API</span>
+                </p>
+                <br /><br />
+                <button id="card1" class="mobile-button">Learn more</button>
+              </div>
+            </div>
+            <div class="card hidden">
+              <div class="card-container flex">
+                <p class="card-title">Luxurity</p>
+                <p class="card-highlight">
+                  <span>REACTJS</span> <span>REDUX</span>
+                  <span>JAVASCRIPT</span>
+                  <span>EXPRESSJS</span>
+                  <span>FIREBASE</span> <span>AXIOS</span>
+                </p>
+                <br /><br />
+                <button id="card2" class="mobile-button">Learn more</button>
+              </div>
+            </div>
+            <div class="card hidden">
+              <div class="card-container flex">
+                <p class="card-title">Homely</p>
+                <p class="card-highlight">
+                  <span>PHP</span> <span>MYSQL</span> <span>PHPMYADMIN</span>
+                  <span>JQUERY</span>
+                  <span>BOOTSTRAP</span>
+                </p>
+                <br /><br />
+                <button id="card3" class="mobile-button">Learn more</button>
+              </div>
+            </div>
+            <div class="card hidden">
+              <div class="card-container flex">
+                <p class="card-title">AI Int</p>
+                <p class="card-highlight">
+                  <span>JQUERY</span> <span>TWEENMAX</span>
+                </p>
+                <br /><br />
+                <button id="card4" class="mobile-button">Learn more</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card1-open canvas flex">
+          <div class="details-card">
+            <button class="close">x</button>
+            <div id="slider_1" class="carousel">
+              <ul class="imageList">
+                <li><img src="images/socialapp3.png" /></li>
+                <li><img src="images/socialapp2.png" /></li>
+                <li><img src="images/socialapp1.png" /></li>
+              </ul>
+              <div class="slider-outer">
+                <i id="prev" class="fas fa-chevron-left prev"></i
+                ><i id="next" class="fas fa-chevron-right next"></i>
+              </div>
+            </div>
+            <div class="info">
+              <p class="maintext" style="color: rgb(0, 0, 0);">Chatsy</p>
+              <p class="smalltext" style="font-weight: bold;">
+                SOCIAL MEDIA PLATFORM
+              </p>
+              <hr class="divider" />
+              <p class="card-description">
+                Chatsy is a fully functional, microblogging social media
+                platform inspired by Twitter's design where users can create
+                dynamic profiles, follow other users, stay updated on the latest
+                news, and make interactive posts.
+              </p>
+              <button
+                class="mobile-button active"
+                onclick="window.open('https://socialapp-79173.firebaseapp.com/')"
+              >
+                <i class="fas fa-external-link-alt"></i> View site
+              </button>
+              <button
+                class="mobile-button"
+                onclick="window.open('https://github.com/xenvi/socialapp-client')"
+              >
+                <i class="fab fa-github"></i> Source
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card2-open canvas flex">
+          <div class="details-card">
+            <button class="close">x</button>
+            <div id="slider_2" class="carousel">
+              <ul class="imageList">
+                <li><img src="images/luxurity1.png" /></li>
+                <li><img src="images/luxurity2.png" /></li>
+                <li><img src="images/luxurity3.png" /></li>
+              </ul>
+              <div class="slider-outer">
+                <i id="prev" class="fas fa-chevron-left prev"></i
+                ><i id="next" class="fas fa-chevron-right next"></i>
+              </div>
+            </div>
+            <div class="info">
+              <p class="maintext" style="color: rgb(0, 0, 0);">Luxurity</p>
+              <p class="smalltext" style="font-weight: bold;">
+                E-COMMERCE PLATFORM
+              </p>
+              <hr class="divider" />
+              <p class="card-description">
+                Luxurity is a small business e-commerce site selling dress
+                products. Customers are able to create an account, learn more
+                about the company, view and filter shop items, and add items to
+                their cart.
+              </p>
+              <button
+                class="mobile-button active"
+                onclick="window.open('https://luxurity.netlify.com/')"
+              >
+                <i class="fas fa-external-link-alt"></i> View site
+              </button>
+              <button
+                class="mobile-button"
+                onclick="window.open('https://github.com/xenvi/shopping-cart')"
+              >
+                <i class="fab fa-github"></i> Source
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3-open canvas flex">
+          <div class="details-card">
+            <button class="close">x</button>
+            <div id="slider_3" class="carousel">
+              <ul class="imageList">
+                <li><img src="images/homely1.png" /></li>
+                <li><img src="images/homely2.png" /></li>
+                <li><img src="images/homely3.png" /></li>
+              </ul>
+              <div class="slider-outer">
+                <i id="prev" class="fas fa-chevron-left prev"></i
+                ><i id="next" class="fas fa-chevron-right next"></i>
+              </div>
+            </div>
+            <div class="info">
+              <p class="maintext" style="color: rgb(0, 0, 0);">Homely</p>
+              <p class="smalltext" style="font-weight: bold;">
+                MOCK REALESTATE SITE
+              </p>
+              <hr class="divider" />
+              <p class="card-description">
+                Homely is a realestate platform where users can find homes for
+                rent or purchase, or create their own listings accessible to
+                other users.
+              </p>
+              <button
+                class="mobile-button active"
+                onclick="window.open('http://homely.epizy.com/main.php')"
+              >
+                <i class="fas fa-external-link-alt"></i> View site
+              </button>
+              <button
+                class="mobile-button"
+                onclick="window.open('https://github.com/xenvi/mock-realestate-site')"
+              >
+                <i class="fab fa-github"></i> Source
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card4-open canvas flex">
+          <div class="details-card">
+            <button class="close">x</button>
+            <div id="slider_4" class="carousel">
+              <ul>
+                <li><img src="images/ai-gif.gif" /></li>
+              </ul>
+            </div>
+            <div class="info">
+              <p class="maintext" style="color: rgb(0, 0, 0);">AI Int</p>
+              <p class="smalltext" style="font-weight: bold;">
+                PRODUCT LANDING PAGE
+              </p>
+              <hr class="divider" />
+              <p class="card-description">
+                AI Int is a prototype landing page for a company which sells
+                technological innovations. It feautures modern UI/UX and sleek
+                animations.
+              </p>
+              <button
+                class="mobile-button active"
+                onclick="window.open('https://xenvi.github.io/ai-intelligence/')"
+              >
+                <i class="fas fa-external-link-alt"></i> View site
+              </button>
+              <button
+                class="mobile-button"
+                onclick="window.open('https://github.com/xenvi/ai-intelligence')"
+              >
+                <i class="fab fa-github"></i> Source
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="cover flex">
+          <p class="smalltext">Interested in working with me?</p>
+          <p class="maintext">Send A Message</p>
+          <br />
+          <form
+            id="contact-form"
+            action="https://formspree.io/mnqdjjrk"
+            method="POST"
+            class="hidden"
           >
-            Resume
-          </button>
-        </li>
-      </ul>
-
-      <div class="mobile-icons">
-        <a href="https://github.com/xenvi"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/tiffanytranx/"
-          ><i class="fab fa-linkedin-in"></i
-        ></a>
-      </div>
-    </nav>
-
-    <section id="home">
-      <div class="cover flex">
-        <div>
-          <p class="smalltext intro1">Hello, my name is</p>
-
-          <p class="maintext intro2">Tiffany Tran.</p>
-
-          <p class="maintext intro3" style="font-size: 2em;">
-            I am a full-stack web developer.
-          </p>
-        </div>
-      </div>
-      <div class="arrow-down">
-        <p>Learn more</p>
-        <a href="#about"><i class="fas fa-chevron-down"></i></a>
-      </div>
-      <div class="media-icons">
-        <a href="https://github.com/xenvi"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/tiffanytranx/"
-          ><i class="fab fa-linkedin-in"></i
-        ></a>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="cover flex">
-        <p class="maintext offsetTop about-title">About Me</p>
-        <br /><br />
-        <div class="row wrap flex about-container">
-          <div>
-            <img src="images/results.svg" alt="results" />
-            <p class="maintext" style="font-size: 2em; padding-bottom: 0.2em;">
-              Results-driven
-            </p>
-            <p class="smalltext">
-              Each one of my projects are created with efficiency and
-              <br />above satisfactory results in mind.
-            </p>
-          </div>
-          <div>
-            <img src="images/heart.svg" alt="heart" />
-            <p class="maintext" style="font-size: 2em; padding-bottom: 0.2em;">
-              Passion to Learn
-            </p>
-            <p class="smalltext">
-              I enjoy indulging in complex and unfamiliar code during my free
-              time. Each new day is an opportunity to learn.
-            </p>
-          </div>
-          <div>
-            <img src="images/dynamic.svg" alt="dynamic" />
-            <p class="maintext" style="font-size: 2em; padding-bottom: 0.2em;">
-              Dynamic
-            </p>
-            <p class="smalltext">
-              I strongly believe in creating simple but powerful UI designs that
-              will bring any static page to life.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="cover flex">
-        <p class="maintext offsetTop">Projects</p>
-        <br /><br />
-        <div class="container flex-portfolio wrap row">
-          <div class="card">
-            <div class="card-container flex">
-              <p class="card-title">Chatsy</p>
-              <p class="card-highlight">
-                <span>REACTJS</span> <span>REDUX</span> <span>JAVASCRIPT</span>
-                <span>MATERIAL-UI</span>
-                <span>FIREBASE</span> <span>AXIOS</span> <span>EXPRESSJS</span>
-              </p>
-              <br /><br />
-              <button id="card1" class="mobile-button">Learn more</button>
+            <div id="success" class="hidden">
+              Successfully sent message, thank you!
             </div>
-          </div>
-          <div class="card">
-            <div class="card-container flex">
-              <p class="card-title">Luxurity</p>
-              <p class="card-highlight">
-                <span>REACTJS</span> <span>REDUX</span> <span>JAVASCRIPT</span>
-                <span>EXPRESSJS</span>
-                <span>FIREBASE</span> <span>AXIOS</span>
-              </p>
-              <br /><br />
-              <button id="card2" class="mobile-button">Learn more</button>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-container flex">
-              <p class="card-title">Homely</p>
-              <p class="card-highlight">
-                <span>PHP</span> <span>MYSQL</span> <span>PHPMYADMIN</span>
-                <span>JQUERY</span>
-                <span>BOOTSTRAP</span>
-              </p>
-              <br /><br />
-              <button id="card3" class="mobile-button">Learn more</button>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-container flex">
-              <p class="card-title">AI Int</p>
-              <p class="card-highlight">
-                <span>JQUERY</span> <span>TWEENMAX</span>
-              </p>
-              <br /><br />
-              <button id="card4" class="mobile-button">Learn more</button>
-            </div>
-          </div>
+            <input type="text" name="name" placeholder="Your Name" required />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter Email"
+              required
+            />
+
+            <textarea
+              type="text"
+              name="message"
+              placeholder="Your Message"
+              rows="10"
+            ></textarea>
+            <input type="submit" value="Send" class="submit-button" />
+          </form>
         </div>
-      </div>
-
-      <div class="card1-open canvas flex">
-        <div class="details-card">
-          <button class="close">x</button>
-          <div id="slider_1" class="carousel">
-            <ul class="imageList">
-              <li><img src="images/socialapp3.png" /></li>
-              <li><img src="images/socialapp2.png" /></li>
-              <li><img src="images/socialapp1.png" /></li>
-            </ul>
-            <div class="slider-outer">
-              <i id="prev" class="fas fa-chevron-left prev"></i
-              ><i id="next" class="fas fa-chevron-right next"></i>
-            </div>
-          </div>
-          <div class="info">
-            <p class="maintext" style="color: rgb(0, 0, 0);">Chatsy</p>
-            <p class="smalltext" style="font-weight: bold;">
-              SOCIAL MEDIA PLATFORM
-            </p>
-            <hr class="divider" />
-            <p class="card-description">
-              Chatsy is a fully functional, microblogging social media platform
-              inspired by Twitter's design where users can create posts, edit
-              their profiles, and interact with other posts via likes/comments.
-            </p>
-            <button
-              class="mobile-button active"
-              onclick="window.open('https://socialapp-79173.firebaseapp.com/')"
-            >
-              <i class="fas fa-external-link-alt"></i> View site
-            </button>
-            <button
-              class="mobile-button"
-              onclick="window.open('https://github.com/xenvi/socialapp-client')"
-            >
-              <i class="fab fa-github"></i> Source
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card2-open canvas flex">
-        <div class="details-card">
-          <button class="close">x</button>
-          <div id="slider_2" class="carousel">
-            <ul class="imageList">
-              <li><img src="images/luxurity1.png" /></li>
-              <li><img src="images/luxurity2.png" /></li>
-              <li><img src="images/luxurity3.png" /></li>
-            </ul>
-            <div class="slider-outer">
-              <i id="prev" class="fas fa-chevron-left prev"></i
-              ><i id="next" class="fas fa-chevron-right next"></i>
-            </div>
-          </div>
-          <div class="info">
-            <p class="maintext" style="color: rgb(0, 0, 0);">Luxurity</p>
-            <p class="smalltext" style="font-weight: bold;">
-              E-COMMERCE PLATFORM
-            </p>
-            <hr class="divider" />
-            <p class="card-description">
-              Luxurity is a small business e-commerce site selling dress
-              products. Customers are able to learn more about the company and
-              add items to their cart.
-            </p>
-            <button
-              class="mobile-button active"
-              onclick="window.open('https://luxurity.netlify.com/')"
-            >
-              <i class="fas fa-external-link-alt"></i> View site
-            </button>
-            <button
-              class="mobile-button"
-              onclick="window.open('https://github.com/xenvi/shopping-cart')"
-            >
-              <i class="fab fa-github"></i> Source
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card3-open canvas flex">
-        <div class="details-card">
-          <button class="close">x</button>
-          <div id="slider_3" class="carousel">
-            <ul class="imageList">
-              <li><img src="images/homely1.png" /></li>
-              <li><img src="images/homely2.png" /></li>
-              <li><img src="images/homely3.png" /></li>
-            </ul>
-            <div class="slider-outer">
-              <i id="prev" class="fas fa-chevron-left prev"></i
-              ><i id="next" class="fas fa-chevron-right next"></i>
-            </div>
-          </div>
-          <div class="info">
-            <p class="maintext" style="color: rgb(0, 0, 0);">Homely</p>
-            <p class="smalltext" style="font-weight: bold;">
-              MOCK REALESTATE SITE
-            </p>
-            <hr class="divider" />
-            <p class="card-description">
-              Homely is a realestate platform where users can find homes for
-              rent or purchase, or create their own listings accessible to other
-              users.
-            </p>
-            <button
-              class="mobile-button active"
-              onclick="window.open('http://homely.epizy.com/main.php')"
-            >
-              <i class="fas fa-external-link-alt"></i> View site
-            </button>
-            <button
-              class="mobile-button"
-              onclick="window.open('https://github.com/xenvi/mock-realestate-site')"
-            >
-              <i class="fab fa-github"></i> Source
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card4-open canvas flex">
-        <div class="details-card">
-          <button class="close">x</button>
-          <div id="slider_4" class="carousel">
-            <ul>
-              <li><img src="images/ai-gif.gif" /></li>
-            </ul>
-          </div>
-          <div class="info">
-            <p class="maintext" style="color: rgb(0, 0, 0);">AI Int</p>
-            <p class="smalltext" style="font-weight: bold;">
-              PRODUCT LANDING PAGE
-            </p>
-            <hr class="divider" />
-            <p class="card-description">
-              AI Int is a prototype landing page for a company which sells
-              technological innovations. It feautures modern UI/UX and sleek
-              animations.
-            </p>
-            <button
-              class="mobile-button active"
-              onclick="window.open('https://xenvi.github.io/ai-intelligence/')"
-            >
-              <i class="fas fa-external-link-alt"></i> View site
-            </button>
-            <button
-              class="mobile-button"
-              onclick="window.open('https://github.com/xenvi/ai-intelligence')"
-            >
-              <i class="fab fa-github"></i> Source
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="cover flex">
-        <p class="smalltext">Interested in working with me?</p>
-        <p class="maintext">Send A Message</p>
-        <br />
-        <form
-          id="contact-form"
-          action="https://formspree.io/mnqdjjrk"
-          method="POST"
-        >
-          <div id="success" class="hidden">
-            Successfully sent message, thank you!
-          </div>
-          <input type="text" name="name" placeholder="Your Name" required />
-
-          <input type="email" name="email" placeholder="Enter Email" required />
-
-          <textarea
-            type="text"
-            name="message"
-            placeholder="Your Message"
-            rows="10"
-          ></textarea>
-          <input type="submit" value="Send" class="submit-button" />
-        </form>
-      </div>
-    </section>
+      </section>
+    </div>
 
     <!-- SCRIPT CDNS -->
     <script
