@@ -357,6 +357,9 @@ p.card-description {
 .card:nth-child(4) {
   background: url("images/landingpg.jpg") center center/cover;
 }
+.card:nth-child(5) {
+  background: url("images/vibrante.png") center center/cover;
+}
 
 .canvas {
   position: fixed;

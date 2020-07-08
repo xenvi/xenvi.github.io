@@ -45,6 +45,9 @@ $(document).ready(function () {
   $("#card4").click(function () {
     $(".card4-open").fadeIn(500).css("display", "flex");
   });
+  $("#card5").click(function () {
+    $(".card5-open").fadeIn(500).css("display", "flex");
+  });
 
   // carousel
   var carousels = document.querySelectorAll(".carousel");
