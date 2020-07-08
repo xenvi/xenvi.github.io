@@ -374,7 +374,8 @@ p.card-description {
 .card1-open,
 .card2-open,
 .card3-open,
-.card4-open {
+.card4-open,
+.card5-open {
   display: none;
 }
 .details-card {
