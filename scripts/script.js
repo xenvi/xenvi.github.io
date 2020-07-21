@@ -48,6 +48,9 @@ $(document).ready(function () {
   $("#card5").click(function () {
     $(".card5-open").fadeIn(500).css("display", "flex");
   });
+  $("#card6").click(function () {
+    $(".card6-open").fadeIn(500).css("display", "flex");
+  });
 
   // carousel
   var carousels = document.querySelectorAll(".carousel");

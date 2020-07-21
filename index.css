@@ -360,6 +360,9 @@ p.card-description {
 .card:nth-child(5) {
   background: url("images/vibrante.png") center center/cover;
 }
+.card:nth-child(6) {
+  background: url("images/niffty.png") center center/cover;
+}
 
 .canvas {
   position: fixed;
@@ -375,7 +378,8 @@ p.card-description {
 .card2-open,
 .card3-open,
 .card4-open,
-.card5-open {
+.card5-open,
+.card6-open {
   display: none;
 }
 .details-card {
@@ -602,7 +606,6 @@ footer > p {
   background: #fff;
   color: #000;
   font-size: 1.05em;
-
   font-family: "Roboto Mono", monospace;
 }
 .mobile-button {
@@ -614,6 +617,7 @@ footer > p {
   color: #000;
   background: #fff;
   font-weight: bold;
+  outline: 0;
 }
 .mobile-button:hover {
   background-color: rgb(255, 119, 119);
