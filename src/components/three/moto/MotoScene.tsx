@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, Lightformer, MeshReflectorMaterial, OrbitControls, RoundedBox } from '@react-three/drei'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
+import { MAX_MPH } from '@/lib/bike'
 
 export type Throttle = { current: number }
 
@@ -185,8 +186,8 @@ function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
     }
     if (headlight.current) headlight.current.color.setRGB(2.4 + throttle.current * 4, 2.6 + throttle.current * 4, 3 + throttle.current * 4)
     if (under.current) under.current.intensity = 6 + throttle.current * 14
-    // same scale as the HUD speedometer in Ride.tsx
-    const mph = Math.round(throttle.current * 75)
+    // throttle.current is speed / MAX_MPH (see lib/bike.ts)
+    const mph = Math.round(throttle.current * MAX_MPH)
     if (mph !== shownMph.current) {
       shownMph.current = mph
       dash.draw(mph)

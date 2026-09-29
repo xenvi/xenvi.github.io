@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useMediaQuery, useMotion } from '@/lib/motion'
 import { useReveal } from '@/lib/useReveal'
 import { SectionHeading } from './SectionHeading'
+import { MAX_MPH, stepSpeed } from '@/lib/bike'
 import type { Throttle } from '../three/moto/MotoScene'
 
 const MotoScene = dynamic(() => import('../three/moto/MotoScene'), {
@@ -44,8 +45,8 @@ function useWhine() {
       o2.start()
       const t = ac.currentTime
       g.gain.linearRampToValueAtTime(0.05, t + 0.15)
-      o1.frequency.exponentialRampToValueAtTime(900, t + 2.2)
-      o2.frequency.exponentialRampToValueAtTime(1800, t + 2.2)
+      o1.frequency.exponentialRampToValueAtTime(900, t + 3.8)
+      o2.frequency.exponentialRampToValueAtTime(1800, t + 3.8)
       osc.current = { o1, o2, g }
     } catch {
       // Audio is a garnish; ignore failures.
@@ -81,6 +82,7 @@ export function Ride() {
   const barEl = useRef<HTMLDivElement>(null)
   const throttle = useRef(0) as Throttle
   const target = useRef(0)
+  const speedMph = useRef(0)
   const whine = useWhine()
 
   // Only render the 3D bike while it's on screen.
@@ -97,10 +99,11 @@ export function Ride() {
     const tick = (now: number) => {
       const dt = (now - last) / 1000
       last = now
-      throttle.current += (target.current - throttle.current) * (1 - Math.exp(-dt * (target.current ? 1.4 : 3)))
-      const mph = Math.round(throttle.current * 75)
+      speedMph.current = stepSpeed(speedMph.current, target.current === 1, dt)
+      throttle.current = speedMph.current / MAX_MPH
+      const mph = Math.round(speedMph.current)
       if (speedEl.current) speedEl.current.textContent = String(mph)
-      if (barEl.current) barEl.current.style.width = `${Math.min(100, mph / 0.75)}%`
+      if (barEl.current) barEl.current.style.width = `${(mph / MAX_MPH) * 100}%`
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
@@ -159,6 +162,7 @@ export function Ride() {
               <div className="mt-2 h-1 w-28 overflow-hidden rounded bg-white/10">
                 <div ref={barEl} className="h-full w-0 bg-gradient-to-r from-teal via-purple to-pink" />
               </div>
+              <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.2em] text-haze/60">0–60 in 3.8s · {MAX_MPH} top</div>
             </div>
           </div>
 
