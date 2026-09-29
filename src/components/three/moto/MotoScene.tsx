@@ -103,44 +103,53 @@ function Wheel({ position, spin, front }: { position: [number, number, number]; 
   )
 }
 
-/** EV instrument cluster: speed, battery, ride mode. */
-function makeDashTexture() {
-  const c = document.createElement('canvas')
-  c.width = 512
-  c.height = 220
-  const g = c.getContext('2d')!
-  g.fillStyle = '#05060a'
-  g.fillRect(0, 0, 512, 220)
-  g.strokeStyle = 'rgba(0,240,255,0.35)'
-  g.lineWidth = 4
-  g.strokeRect(6, 6, 500, 208)
-  g.fillStyle = '#ffffff'
-  g.font = '700 96px ui-monospace, monospace'
-  g.textBaseline = 'middle'
-  g.fillText('0', 34, 100)
-  g.fillStyle = '#00f0ff'
-  g.font = '600 26px ui-monospace, monospace'
-  g.fillText('MPH', 100, 124)
-  g.fillStyle = '#d4ff1a'
-  g.fillText('READY', 34, 180)
-  g.fillStyle = '#ff2e97'
-  g.fillText('SPORT', 150, 180)
-  // battery
-  g.strokeStyle = '#ffffff'
-  g.lineWidth = 4
-  g.strokeRect(270, 60, 190, 70)
-  g.fillRect(462, 82, 10, 26)
-  const grad = g.createLinearGradient(274, 0, 456, 0)
-  grad.addColorStop(0, '#00f0ff')
-  grad.addColorStop(1, '#d4ff1a')
-  g.fillStyle = grad
-  g.fillRect(276, 66, 178 * 0.86, 58)
-  g.fillStyle = '#ffffff'
-  g.font = '600 30px ui-monospace, monospace'
-  g.fillText('86%', 330, 170)
-  const tex = new THREE.CanvasTexture(c)
-  tex.colorSpace = THREE.SRGBColorSpace
-  return tex
+/** EV instrument cluster: live speed, battery, ride mode. Redrawn only when the mph value changes. */
+function makeDash() {
+  const canvas = document.createElement('canvas')
+  canvas.width = 512
+  canvas.height = 220
+  const g = canvas.getContext('2d')!
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.colorSpace = THREE.SRGBColorSpace
+
+  const draw = (mph: number) => {
+    g.fillStyle = '#05060a'
+    g.fillRect(0, 0, 512, 220)
+    g.strokeStyle = 'rgba(0,240,255,0.35)'
+    g.lineWidth = 4
+    g.strokeRect(6, 6, 500, 208)
+    g.textBaseline = 'middle'
+    g.textAlign = 'right'
+    g.fillStyle = '#ffffff'
+    g.font = '700 96px ui-monospace, monospace'
+    g.fillText(String(mph), 190, 100)
+    g.textAlign = 'left'
+    g.fillStyle = '#00f0ff'
+    g.font = '600 26px ui-monospace, monospace'
+    g.fillText('MPH', 200, 124)
+    const moving = mph > 0
+    g.fillStyle = moving ? 'rgba(212,255,26,0.35)' : '#d4ff1a'
+    g.fillText('READY', 34, 180)
+    g.fillStyle = moving ? '#ff2e97' : 'rgba(255,46,151,0.35)'
+    g.fillText('SPORT', 150, 180)
+    // battery
+    g.strokeStyle = '#ffffff'
+    g.lineWidth = 4
+    g.strokeRect(290, 60, 170, 70)
+    g.fillStyle = '#ffffff'
+    g.fillRect(462, 82, 10, 26)
+    const grad = g.createLinearGradient(294, 0, 456, 0)
+    grad.addColorStop(0, '#00f0ff')
+    grad.addColorStop(1, '#d4ff1a')
+    g.fillStyle = grad
+    g.fillRect(296, 66, 158 * 0.86, 58)
+    g.fillStyle = '#ffffff'
+    g.font = '600 30px ui-monospace, monospace'
+    g.fillText('86%', 340, 170)
+    texture.needsUpdate = true
+  }
+  draw(0)
+  return { texture, draw }
 }
 
 function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
@@ -157,8 +166,9 @@ function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
   const black = useMemo(() => new THREE.MeshStandardMaterial({ color: '#121216', metalness: 0.45, roughness: 0.45 }), [])
   const gloss = useMemo(() => new THREE.MeshPhysicalMaterial({ color: '#0e0e12', metalness: 0.6, roughness: 0.25, clearcoat: 0.8 }), [])
   const seat = useMemo(() => new THREE.MeshStandardMaterial({ color: '#26262c', roughness: 0.85 }), [])
-  const dashTexture = useMemo(() => makeDashTexture(), [])
-  useEffect(() => () => dashTexture.dispose(), [dashTexture])
+  const dash = useMemo(() => makeDash(), [])
+  const shownMph = useRef(0)
+  useEffect(() => () => dash.texture.dispose(), [dash])
   const yellow = useMemo(
     () => new THREE.MeshStandardMaterial({ color: '#c8f000', emissive: '#b8e600', emissiveIntensity: 0.35, metalness: 0.3, roughness: 0.35 }),
     [],
@@ -175,6 +185,12 @@ function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
     }
     if (headlight.current) headlight.current.color.setRGB(2.4 + throttle.current * 4, 2.6 + throttle.current * 4, 3 + throttle.current * 4)
     if (under.current) under.current.intensity = 6 + throttle.current * 14
+    // same scale as the HUD speedometer in Ride.tsx
+    const mph = Math.round(throttle.current * 75)
+    if (mph !== shownMph.current) {
+      shownMph.current = mph
+      dash.draw(mph)
+    }
   })
 
   return (
@@ -277,11 +293,11 @@ function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
       <Rod a={[0.49, 1.06, 0]} b={[0.45, 1.16, 0]} r={0.018}>
         <primitive object={black} attach="material" />
       </Rod>
-      <group position={[0.44, 1.21, 0]} rotation-z={0.5}>
+      <group position={[0.44, 1.21, 0]} rotation-z={-0.95}>
         <RoundedBox args={[0.026, 0.13, 0.28]} radius={0.01} material={black} />
         <mesh position-x={-0.0135} rotation-y={-Math.PI / 2}>
           <planeGeometry args={[0.25, 0.105]} />
-          <meshBasicMaterial map={dashTexture} toneMapped={false} />
+          <meshBasicMaterial map={dash.texture} toneMapped={false} />
         </mesh>
       </group>
 
