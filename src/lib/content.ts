@@ -1,0 +1,131 @@
+export const links = {
+  github: 'https://github.com/xenvi',
+  linkedin: 'https://www.linkedin.com/in/tiffanytranx/',
+  formspree: 'https://formspree.io/f/mnqdjjrk',
+  // The only resume on hand is the 2020 one from the old site. Flip this on once there's a current PDF.
+  resume: null as string | null,
+}
+
+export const skillGroups = [
+  {
+    id: 'core',
+    title: 'Core',
+    glyph: '01',
+    color: 'pink',
+    items: ['JavaScript', 'TypeScript', 'React', 'Next.js', 'React Native', 'Node.js', 'Express', 'Python', 'Django', 'SQL', 'GraphQL', 'REST APIs', 'HTML', 'CSS', 'Sass'],
+  },
+  {
+    id: 'ui',
+    title: 'Frontend / UI',
+    glyph: '02',
+    color: 'teal',
+    items: ['Tailwind CSS', 'Material UI', 'Storybook', 'React Context', 'Design systems', 'Component libraries', 'Responsive design', 'Accessibility', 'Dark mode', 'DRY architecture'],
+  },
+  {
+    id: 'ship',
+    title: 'Testing / Delivery',
+    glyph: '04',
+    color: 'blue',
+    items: ['Playwright', 'CircleCI', 'CI/CD', 'Vercel', 'Git', 'GitHub', 'Code & PR reviews'],
+  },
+  {
+    id: 'viz',
+    title: 'Scientific Viz',
+    glyph: '03',
+    color: 'purple',
+    items: ['D3', 'Plotly', 'Omics data', 'Genomics', 'Biological data', 'Volcano plots', 'Violin plots', 'Scatter & dot plots', '250k+ point datasets', 'FE + BE perf safeguards'],
+  },
+  {
+    id: 'money',
+    title: 'Payments',
+    glyph: '05',
+    color: 'pink',
+    items: ['Stripe', 'RevenueCat', 'In-app purchases', 'App Store'],
+  },
+  {
+    id: 'cloud',
+    title: 'Cloud + Analytics',
+    glyph: '06',
+    color: 'teal',
+    items: ['CloudFront', 'S3', 'Amplify', 'Cognito', 'Amplitude', 'Sentry'],
+  },
+  {
+    id: 'ai',
+    title: 'AI Development',
+    glyph: '07',
+    color: 'purple',
+    items: ['Model Context Protocol', 'Claude Code', 'GitHub Copilot', 'ChatGPT', 'AI code review', 'AI ticket workflows', 'Linear'],
+  },
+] as const
+
+export const strengths = [
+  { k: 'Architecture ownership', v: 'I design the system, then I live in it.' },
+  { k: 'Product ownership', v: 'I care about the why as much as the how.' },
+  { k: 'Incomplete requirements', v: 'Give me a fuzzy problem. I will come back with a plan.' },
+  { k: 'Frontend leadership', v: 'Design systems, standards, and reviews that level teams up.' },
+  { k: 'Mentoring', v: 'Self-taught means I remember what it is like to start.' },
+  { k: 'Cross-functional', v: 'Fluent in design, data, product and engineering.' },
+]
+
+export const projects = [
+  {
+    name: 'Chatsy',
+    kind: 'Social media platform',
+    year: '2020',
+    img: '/projects/chatsy.webp',
+    blurb: 'A mobile-friendly microblogging platform inspired by Twitter: dynamic profiles, follows, a live news feed and interactive posts.',
+    tags: ['React', 'Redux', 'Material UI', 'Express', 'GCP'],
+    live: 'https://socialapp-79173.firebaseapp.com/',
+    source: 'https://github.com/xenvi/socialapp-client',
+  },
+  {
+    name: 'Luxurity',
+    kind: 'E-commerce',
+    year: '2020',
+    img: '/projects/luxurity.webp',
+    blurb: 'A responsive small-business storefront for dresses, with accounts, filterable shop and a cart.',
+    tags: ['React', 'Redux', 'Express', 'GCP'],
+    live: 'https://luxurity.netlify.com/',
+    source: 'https://github.com/xenvi/shopping-cart',
+  },
+  {
+    name: 'AI Int',
+    kind: 'Product landing page',
+    year: '2019',
+    img: '/projects/aiint.webp',
+    blurb: 'A prototype landing page for a tech company with sleek GSAP animations. Where my love of motion started.',
+    tags: ['GSAP', 'jQuery', 'CSS'],
+    live: 'https://xenvi.github.io/ai-intelligence/',
+    source: 'https://github.com/xenvi/ai-intelligence',
+  },
+  {
+    name: 'Homely',
+    kind: 'Real estate',
+    year: '2019',
+    img: '/projects/homely.webp',
+    blurb: 'A fully responsive real estate platform to find homes for rent or purchase, and publish your own listings.',
+    tags: ['PHP', 'MySQL', 'jQuery', 'Bootstrap'],
+    live: null,
+    source: 'https://github.com/xenvi/homely-realestate',
+  },
+  {
+    name: 'Vibrante',
+    kind: 'WordPress theme',
+    year: '2019',
+    img: '/projects/vibrante.webp',
+    blurb: 'A vibrant multipurpose WordPress theme: blog, search, contact form, SEO and customizable content.',
+    tags: ['WordPress', 'PHP', 'Sass'],
+    live: null,
+    source: 'https://github.com/xenvi/Vibrante-WP',
+  },
+  {
+    name: 'Niffty',
+    kind: 'WooCommerce theme',
+    year: '2019',
+    img: '/projects/niffty.webp',
+    blurb: 'A minimalist WordPress theme with full WooCommerce support and page animations.',
+    tags: ['WooCommerce', 'PHP', 'Sass'],
+    live: null,
+    source: 'https://github.com/xenvi/Niffty-WooCommerce-Theme',
+  },
+]
