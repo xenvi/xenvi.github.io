@@ -365,14 +365,6 @@ export function Lab() {
             reactions, laser pointer versus no laser pointer. Somewhere in the data, six secret signals are hiding.{' '}
             <span className="text-white">Find them.</span>
           </p>
-          <div className="glass rounded-xl p-5 font-mono text-xs text-haze/80">
-            <p className="mb-2 text-teal">// how it stays fast</p>
-            <ul className="space-y-1.5">
-              <li>▸ points write straight into an ImageData buffer: no DOM, no SVG nodes</li>
-              <li>▸ a quadtree finds the nearest of {count.toLocaleString()} points in microseconds</li>
-              <li>▸ significant points draw last so they&apos;re never buried</li>
-            </ul>
-          </div>
 
           <div>
             <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.3em] text-haze/70">
