@@ -357,8 +357,8 @@ export function Lab() {
       <div className="grid gap-10 lg:grid-cols-[1fr_2.1fr]">
         <div data-reveal="left" className="space-y-6">
           <p className="text-lg text-haze">
-            I&apos;ve spent years building scientific visualizations for omics and genomics data: volcano plots, violin plots, dot plots,
-            and scatter plots that stay smooth at 250,000+ points.
+            I build data-heavy visualizations with D3 and Plotly, including scientific charts for omics and genomics data: volcano,
+            violin, dot and scatter plots that stay smooth at 250,000+ points.
           </p>
           <p className="text-haze/80">
             So here&apos;s a very serious study: the <span className="text-pink">Purr-teome</span>. We measured gene expression in cats
