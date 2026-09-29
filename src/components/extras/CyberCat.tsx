@@ -124,7 +124,7 @@ export function CyberCat() {
           </span>
         ))}
         {mode === 'sleep' && <span className="absolute -top-5 right-1 animate-pulse font-mono text-xs text-teal">z z</span>}
-        <svg viewBox="0 0 64 48" width={W} style={{ transform: `scaleX(${facing})`, filter: 'drop-shadow(0 0 4px rgba(0,240,255,0.8)) drop-shadow(0 0 10px rgba(255,46,151,0.5))' }}>
+        <svg viewBox="0 0 64 48" width={W} overflow="visible" style={{ overflow: 'visible', transform: `scaleX(${facing})`, filter: 'drop-shadow(0 0 4px rgba(0,240,255,0.8)) drop-shadow(0 0 10px rgba(255,46,151,0.5))' }}>
           <style>{`
             .leg{transform-box:fill-box;transform-origin:50% 0;}
             .walk .la{animation:leg ${dur} ease-in-out infinite alternate}

@@ -79,16 +79,6 @@ export const projects = [
     source: 'https://github.com/xenvi/socialapp-client',
   },
   {
-    name: 'Luxurity',
-    kind: 'E-commerce',
-    year: '2020',
-    img: '/projects/luxurity.webp',
-    blurb: 'A responsive small-business storefront for dresses, with accounts, filterable shop and a cart.',
-    tags: ['React', 'Redux', 'Express', 'GCP'],
-    live: 'https://luxurity.netlify.com/',
-    source: 'https://github.com/xenvi/shopping-cart',
-  },
-  {
     name: 'AI Int',
     kind: 'Product landing page',
     year: '2019',
@@ -97,6 +87,16 @@ export const projects = [
     tags: ['GSAP', 'jQuery', 'CSS'],
     live: 'https://xenvi.github.io/ai-intelligence/',
     source: 'https://github.com/xenvi/ai-intelligence',
+  },
+  {
+    name: 'Luxurity',
+    kind: 'E-commerce',
+    year: '2020',
+    img: '/projects/luxurity.webp',
+    blurb: 'A responsive small-business storefront for dresses, with accounts, filterable shop and a cart.',
+    tags: ['React', 'Redux', 'Express', 'GCP'],
+    live: null,
+    source: 'https://github.com/xenvi/shopping-cart',
   },
   {
     name: 'Homely',

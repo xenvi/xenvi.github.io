@@ -98,9 +98,9 @@ export function Ride() {
       const dt = (now - last) / 1000
       last = now
       throttle.current += (target.current - throttle.current) * (1 - Math.exp(-dt * (target.current ? 1.4 : 3)))
-      const kmh = Math.round(throttle.current * 118)
-      if (speedEl.current) speedEl.current.textContent = String(kmh)
-      if (barEl.current) barEl.current.style.width = `${Math.min(100, kmh / 1.18)}%`
+      const mph = Math.round(throttle.current * 75)
+      if (speedEl.current) speedEl.current.textContent = String(mph)
+      if (barEl.current) barEl.current.style.width = `${Math.min(100, mph / 0.75)}%`
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
@@ -155,7 +155,7 @@ export function Ride() {
             </div>
             <div className="pointer-events-none absolute right-4 top-4 text-right">
               <div className="font-display text-4xl font-black tabular-nums text-white text-glow-teal" ref={speedEl}>0</div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-teal">km/h</div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-teal">mph</div>
               <div className="mt-2 h-1 w-28 overflow-hidden rounded bg-white/10">
                 <div ref={barEl} className="h-full w-0 bg-gradient-to-r from-teal via-purple to-pink" />
               </div>
