@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useRef, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, type ReactNode } from 'react'
 import * as THREE from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, Lightformer, MeshReflectorMaterial, OrbitControls, RoundedBox } from '@react-three/drei'
@@ -103,6 +103,46 @@ function Wheel({ position, spin, front }: { position: [number, number, number]; 
   )
 }
 
+/** EV instrument cluster: speed, battery, ride mode. */
+function makeDashTexture() {
+  const c = document.createElement('canvas')
+  c.width = 512
+  c.height = 220
+  const g = c.getContext('2d')!
+  g.fillStyle = '#05060a'
+  g.fillRect(0, 0, 512, 220)
+  g.strokeStyle = 'rgba(0,240,255,0.35)'
+  g.lineWidth = 4
+  g.strokeRect(6, 6, 500, 208)
+  g.fillStyle = '#ffffff'
+  g.font = '700 96px ui-monospace, monospace'
+  g.textBaseline = 'middle'
+  g.fillText('0', 34, 100)
+  g.fillStyle = '#00f0ff'
+  g.font = '600 26px ui-monospace, monospace'
+  g.fillText('MPH', 100, 124)
+  g.fillStyle = '#d4ff1a'
+  g.fillText('READY', 34, 180)
+  g.fillStyle = '#ff2e97'
+  g.fillText('SPORT', 150, 180)
+  // battery
+  g.strokeStyle = '#ffffff'
+  g.lineWidth = 4
+  g.strokeRect(270, 60, 190, 70)
+  g.fillRect(462, 82, 10, 26)
+  const grad = g.createLinearGradient(274, 0, 456, 0)
+  grad.addColorStop(0, '#00f0ff')
+  grad.addColorStop(1, '#d4ff1a')
+  g.fillStyle = grad
+  g.fillRect(276, 66, 178 * 0.86, 58)
+  g.fillStyle = '#ffffff'
+  g.font = '600 30px ui-monospace, monospace'
+  g.fillText('86%', 330, 170)
+  const tex = new THREE.CanvasTexture(c)
+  tex.colorSpace = THREE.SRGBColorSpace
+  return tex
+}
+
 function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
   const root = useRef<THREE.Group>(null)
   const spin = useRef(0)
@@ -117,6 +157,8 @@ function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
   const black = useMemo(() => new THREE.MeshStandardMaterial({ color: '#121216', metalness: 0.45, roughness: 0.45 }), [])
   const gloss = useMemo(() => new THREE.MeshPhysicalMaterial({ color: '#0e0e12', metalness: 0.6, roughness: 0.25, clearcoat: 0.8 }), [])
   const seat = useMemo(() => new THREE.MeshStandardMaterial({ color: '#26262c', roughness: 0.85 }), [])
+  const dashTexture = useMemo(() => makeDashTexture(), [])
+  useEffect(() => () => dashTexture.dispose(), [dashTexture])
   const yellow = useMemo(
     () => new THREE.MeshStandardMaterial({ color: '#c8f000', emissive: '#b8e600', emissiveIntensity: 0.35, metalness: 0.3, roughness: 0.35 }),
     [],
@@ -187,14 +229,20 @@ function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
         </Rod>
       ))}
 
-      {/* License plate hanger */}
-      <Rod a={[-0.84, 1.03, 0]} b={[-0.93, 0.8, 0]} r={0.012}>
+      {/* License plate hanger: juts out behind the tail, clear of the tire */}
+      <Rod a={[-0.84, 1.02, 0]} b={[-1.1, 0.9, 0]} r={0.013}>
         <primitive object={black} attach="material" />
       </Rod>
-      <mesh position={[-0.94, 0.74, 0]} rotation-z={0.25}>
-        <boxGeometry args={[0.006, 0.1, 0.16]} />
+      <mesh position={[-1.12, 0.83, 0]} rotation-z={-0.12}>
+        <boxGeometry args={[0.006, 0.11, 0.17]} />
         <meshStandardMaterial color="#6b6b75" roughness={0.7} />
       </mesh>
+      {[-1, 1].map((sd) => (
+        <mesh key={sd} position={[-1.08, 0.92, sd * 0.07]}>
+          <boxGeometry args={[0.03, 0.018, 0.018]} />
+          <Glow color={new THREE.Color('#ff9a1a')} intensity={2.5} />
+        </mesh>
+      ))}
 
       {/* Upside-down forks */}
       {[-0.1, 0.1].map((z) => (
@@ -225,26 +273,30 @@ function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
         </mesh>
       </group>
 
-      {/* Dash, bars, round mirrors */}
-      <mesh position={[0.46, 1.13, 0]} rotation-z={-0.5}>
-        <boxGeometry args={[0.018, 0.09, 0.13]} />
+      {/* Wide TFT display centred on the bars, tilted back toward the rider */}
+      <Rod a={[0.49, 1.06, 0]} b={[0.45, 1.16, 0]} r={0.018}>
         <primitive object={black} attach="material" />
-      </mesh>
-      <mesh position={[0.47, 1.135, 0]} rotation-z={-0.5}>
-        <boxGeometry args={[0.004, 0.07, 0.11]} />
-        <Glow color={TEAL} intensity={1.2} />
-      </mesh>
-      <Rod a={[0.43, 1.12, -0.34]} b={[0.43, 1.12, 0.34]} r={0.014} />
-      {[-1, 1].map((s) => (
-        <group key={s}>
-          <mesh position={[0.43, 1.12, s * 0.34]} rotation-x={Math.PI / 2}>
-            <cylinderGeometry args={[0.022, 0.022, 0.1, 12]} />
+      </Rod>
+      <group position={[0.44, 1.21, 0]} rotation-z={0.5}>
+        <RoundedBox args={[0.026, 0.13, 0.28]} radius={0.01} material={black} />
+        <mesh position-x={-0.0135} rotation-y={-Math.PI / 2}>
+          <planeGeometry args={[0.25, 0.105]} />
+          <meshBasicMaterial map={dashTexture} toneMapped={false} />
+        </mesh>
+      </group>
+
+      {/* Bars (wide) + grips + round mirrors */}
+      <Rod a={[0.43, 1.12, -0.42]} b={[0.43, 1.12, 0.42]} r={0.014} />
+      {[-1, 1].map((sd) => (
+        <group key={sd}>
+          <mesh position={[0.43, 1.12, sd * 0.42]} rotation-x={Math.PI / 2}>
+            <cylinderGeometry args={[0.022, 0.022, 0.11, 12]} />
             <meshStandardMaterial color="#0d0c12" roughness={0.8} />
           </mesh>
-          <Rod a={[0.43, 1.12, s * 0.26]} b={[0.4, 1.3, s * 0.3]} r={0.008}>
+          <Rod a={[0.43, 1.12, sd * 0.32]} b={[0.4, 1.3, sd * 0.37]} r={0.008}>
             <primitive object={black} attach="material" />
           </Rod>
-          <mesh position={[0.4, 1.33, s * 0.3]} rotation-z={Math.PI / 2}>
+          <mesh position={[0.4, 1.33, sd * 0.37]} rotation-z={Math.PI / 2}>
             <cylinderGeometry args={[0.045, 0.045, 0.012, 24]} />
             <primitive object={black} attach="material" />
           </mesh>
