@@ -10,12 +10,12 @@ import { SectionHeading } from './SectionHeading'
 type Secret = { name: string; fc: number; p: number; fact: string; emoji: string }
 
 const SECRETS: Secret[] = [
-  { name: 'MEOW1', fc: 3.4, p: 17.2, emoji: '🐱', fact: 'Upregulated 11× in cats whose humans said "who\'s a good kitty". Also found in the dev who wrote this.' },
+  { name: 'MEOW1', fc: 3.4, p: 17.2, emoji: '🐱', fact: 'Spikes 11× in cats whose humans said "who\'s a good kitty". Also found in the dev who wrote this.' },
   { name: 'ZOOMIES', fc: 4.6, p: 11.5, emoji: '💨', fact: 'Spikes at 3am. Strongly linked to knocking things off desks and to hot-fixes pushed right before bed.' },
-  { name: 'VROOM3', fc: -3.9, p: 15.8, emoji: '🏍️', fact: 'Electric variant: 0 emissions, 100% grin. Expression doubles on twisty mountain roads.' },
+  { name: 'VROOM3', fc: -3.9, p: 15.8, emoji: '🏍️', fact: 'Electric variant: 0 emissions, 100% grin. Readings double on twisty mountain roads.' },
   { name: 'GG-EZ', fc: -2.6, p: 8.4, emoji: '🎮', fact: 'Associated with late-night ranked matches and the phrase "one more game".' },
   { name: 'BOOP4', fc: 1.7, p: 5.1, emoji: '🐾', fact: 'Activated by gentle nose contact. Side effects: purring, slow blinks, pure serotonin.' },
-  { name: 'SHIPIT', fc: -1.9, p: 21.4, emoji: '🚀', fact: 'The most significant gene in the dataset. Regulated by green CI and a good code review.' },
+  { name: 'SHIPIT', fc: -1.9, p: 21.4, emoji: '🚀', fact: 'The strongest signal in the dataset. Triggered by green CI and a good code review.' },
 ]
 
 const COUNTS = [10_000, 50_000, 250_000] as const
@@ -43,7 +43,7 @@ function makeData(n: number, seed: number) {
   return { fc, p, n }
 }
 
-const geneName = (i: number) => {
+const pointName = (i: number) => {
   const pre = ['CYB', 'NEO', 'SYN', 'VLT', 'HOL', 'GLT', 'PXL', 'QNT']
   return `${pre[i % pre.length]}${((i * 7919) % 9973).toString().padStart(4, '0')}`
 }
@@ -164,7 +164,7 @@ export function Lab() {
     return () => cancelAnimationFrame(raf)
   }, [data, view, fcCut, pCut, size, plotW, plotH])
 
-  // Overlay: axes, thresholds, secret-gene rings, hover.
+  // Overlay: axes, thresholds, secret-signal rings, hover.
   useEffect(() => {
     const c = overlayCanvas.current!
     const { w, h, dpr } = size
@@ -213,7 +213,7 @@ export function Lab() {
     ctx.stroke()
     ctx.setLineDash([])
 
-    // secret genes: faint shimmer for the curious
+    // secret signals: faint shimmer for the curious
     SECRETS.forEach((s) => {
       const x = X(s.fc)
       const y = Y(s.p)
@@ -257,7 +257,7 @@ export function Lab() {
       const x = X(v)
       if (x >= PAD.l && x <= PAD.l + plotW) ctx.fillText(String(v), x, h - PAD.b + 16)
     }
-    ctx.fillText('log₂ fold change  (laser pointer vs. none)', PAD.l + plotW / 2, h - 6)
+    ctx.fillText('effect  (laser pointer vs. none)', PAD.l + plotW / 2, h - 6)
     ctx.textAlign = 'right'
     for (let v = 0; v <= 24; v += 4) {
       const y = Y(v)
@@ -267,7 +267,7 @@ export function Lab() {
     ctx.translate(12, PAD.t + plotH / 2)
     ctx.rotate(-Math.PI / 2)
     ctx.textAlign = 'center'
-    ctx.fillText('−log₁₀ p', 0, 0)
+    ctx.fillText('significance', 0, 0)
     ctx.restore()
   }, [size, view, sx, sy, fcCut, pCut, found, hover, hint, plotW, plotH])
 
@@ -289,7 +289,7 @@ export function Lab() {
       return {
         x: PAD.l + sx(data.fc[i]) * view.k + view.tx,
         y: PAD.t + sy(data.p[i]) * view.k + view.ty,
-        name: geneName(i),
+        name: pointName(i),
         fc: data.fc[i],
         p: data.p[i],
       }
@@ -357,12 +357,13 @@ export function Lab() {
       <div className="grid gap-10 lg:grid-cols-[1fr_2.1fr]">
         <div data-reveal="left" className="space-y-6">
           <p className="text-lg text-haze">
-            I build data-heavy visualizations with D3 and Plotly, including scientific charts for omics and genomics data: volcano,
-            violin, dot and scatter plots that stay smooth at 250,000+ points.
+            I build data-heavy visualizations with D3 and Plotly: volcano, violin, dot and scatter plots that stay smooth at 250,000+
+            points, with performance safeguards on both the frontend and the backend.
           </p>
           <p className="text-haze/80">
-            So here&apos;s a very serious study: the <span className="text-pink">Purr-teome</span>. We measured gene expression in cats
-            given a laser pointer versus cats who were not. Somewhere in the data, six genes are hiding. <span className="text-white">Find them.</span>
+            So here&apos;s a very serious study: <span className="text-pink">The Laser Pointer Report</span>. A quarter-million cat
+            reactions, laser pointer versus no laser pointer. Somewhere in the data, six secret signals are hiding.{' '}
+            <span className="text-white">Find them.</span>
           </p>
           <div className="glass rounded-xl p-5 font-mono text-xs text-haze/80">
             <p className="mb-2 text-teal">// how it stays fast</p>
@@ -375,7 +376,7 @@ export function Lab() {
 
           <div>
             <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.3em] text-haze/70">
-              secret genes · {found.length}/{SECRETS.length}
+              secret signals · {found.length}/{SECRETS.length}
             </p>
             <div className="flex flex-wrap gap-2">
               {SECRETS.map((s) => {
@@ -399,7 +400,7 @@ export function Lab() {
                 psst, need a hint?
               </button>
             ) : (
-              <p className="mt-3 font-mono text-xs text-teal">★ Achievement: Certified Cat Geneticist</p>
+              <p className="mt-3 font-mono text-xs text-teal">★ Achievement: Certified Signal Hunter</p>
             )}
           </div>
         </div>
@@ -433,7 +434,7 @@ export function Lab() {
               className="absolute inset-0 cursor-crosshair"
               style={{ touchAction: 'pan-y' }}
               role="img"
-              aria-label={`Volcano plot of ${count.toLocaleString()} simulated genes. ${stats.up} upregulated and ${stats.down} downregulated at the current thresholds.`}
+              aria-label={`Volcano plot of ${count.toLocaleString()} simulated cat reactions. ${stats.up} strong positive and ${stats.down} strong negative at the current thresholds.`}
               onPointerDown={(e) => {
                 if (e.pointerType !== 'mouse') return
                 engaged.current = true
@@ -484,8 +485,8 @@ export function Lab() {
                 <div className={hover.secret ? 'text-amber-300' : 'text-teal'}>
                   {hover.secret ? `${hover.secret.emoji} ${hover.name}` : hover.name}
                 </div>
-                <div className="text-haze/80">log₂FC {hover.fc.toFixed(2)} · −log₁₀p {hover.p.toFixed(2)}</div>
-                {hover.secret && !found.includes(hover.name) && <div className="text-amber-300/80">click to sequence!</div>}
+                <div className="text-haze/80">effect {hover.fc.toFixed(2)} · signal {hover.p.toFixed(2)}</div>
+                {hover.secret && !found.includes(hover.name) && <div className="text-amber-300/80">click to decode!</div>}
               </div>
             )}
             <div className="absolute right-2 top-2 flex flex-col gap-1">
@@ -503,11 +504,11 @@ export function Lab() {
 
           <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
             <label className="block font-mono text-[11px] text-haze/80">
-              |log₂FC| ≥ <span className="text-white">{fcCut.toFixed(1)}</span>
+              |effect| ≥ <span className="text-white">{fcCut.toFixed(1)}</span>
               <input type="range" min={0.5} max={4} step={0.1} value={fcCut} onChange={(e) => setFcCut(Number(e.target.value))} className="mt-2 w-full accent-pink" />
             </label>
             <label className="block font-mono text-[11px] text-haze/80">
-              −log₁₀p ≥ <span className="text-white">{pCut.toFixed(1)}</span>
+              significance ≥ <span className="text-white">{pCut.toFixed(1)}</span>
               <input type="range" min={1.3} max={14} step={0.1} value={pCut} onChange={(e) => setPCut(Number(e.target.value))} className="mt-2 w-full accent-teal" />
             </label>
             <button
@@ -522,13 +523,13 @@ export function Lab() {
       </div>
 
       {fact && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-void/70 p-4 backdrop-blur-sm" onClick={() => setFact(null)} role="dialog" aria-modal aria-label={`Secret gene ${fact.name}`}>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-void/70 p-4 backdrop-blur-sm" onClick={() => setFact(null)} role="dialog" aria-modal aria-label={`Secret signal ${fact.name}`}>
           <div className="glass corner-frame max-w-md rounded-2xl p-8 text-center" onClick={(e) => e.stopPropagation()}>
             <div className="text-6xl">{fact.emoji}</div>
-            <p className="mt-4 font-mono text-xs uppercase tracking-[0.3em] text-amber-300">gene sequenced</p>
+            <p className="mt-4 font-mono text-xs uppercase tracking-[0.3em] text-amber-300">signal decoded</p>
             <h3 className="mt-2 font-display text-3xl font-black text-white">{fact.name}</h3>
             <p className="mt-4 text-haze">{fact.fact}</p>
-            <p className="mt-4 font-mono text-[11px] text-haze/60">log₂FC {fact.fc} · −log₁₀p {fact.p}</p>
+            <p className="mt-4 font-mono text-[11px] text-haze/60">effect {fact.fc} · signal {fact.p}</p>
             <button autoFocus onClick={() => setFact(null)} className="mt-6 rounded-full border border-teal/60 px-6 py-2 font-mono text-xs uppercase tracking-widest text-teal hover:bg-teal/10">
               {found.length === SECRETS.length ? 'All six! Nice.' : `Keep hunting (${found.length}/${SECRETS.length})`}
             </button>

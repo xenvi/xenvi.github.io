@@ -32,47 +32,72 @@ function Glow({ color, intensity = 3 }: { color: THREE.Color; intensity?: number
   return <meshBasicMaterial color={color.clone().multiplyScalar(intensity)} toneMapped={false} />
 }
 
-function Wheel({ position, hubMotor, spin }: { position: [number, number, number]; hubMotor?: boolean; spin: React.MutableRefObject<number> }) {
+const YELLOW = new THREE.Color('#d4ff1a')
+const RED = new THREE.Color('#ff1a3c')
+
+type P2 = [number, number]
+
+/** Side-profile polygon extruded across the bike's width: gives the angular, faceted panels. */
+function Panel({ pts, depth, z = 0, material, bevel = 0.012 }: { pts: P2[]; depth: number; z?: number; material: THREE.Material; bevel?: number }) {
+  const geo = useMemo(() => {
+    const shape = new THREE.Shape(pts.map(([x, y]) => new THREE.Vector2(x, y)))
+    const g = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: bevel > 0, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 3 })
+    g.translate(0, 0, -depth / 2)
+    return g
+  }, [pts, depth, bevel])
+  return <mesh geometry={geo} position-z={z} material={material} castShadow />
+}
+
+// Side profiles (x forward, y up), loosely traced from a Can-Am Pulse
+const TANK: P2[] = [[0.58, 0.97], [0.44, 1.07], [0.06, 1.03], [-0.08, 0.94], [-0.02, 0.8], [0.3, 0.75], [0.52, 0.83]]
+const BODY: P2[] = [[0.46, 0.8], [0.3, 0.75], [-0.02, 0.8], [-0.24, 0.72], [-0.32, 0.5], [-0.14, 0.3], [0.2, 0.28], [0.42, 0.46]]
+const ACCENT: P2[] = [[0.3, 0.56], [-0.1, 0.64], [-0.17, 0.49], [0.2, 0.41]]
+const SEAT: P2[] = [[-0.04, 0.96], [-0.6, 1.04], [-0.62, 0.99], [-0.1, 0.88]]
+const TAIL: P2[] = [[-0.42, 1.0], [-0.9, 1.13], [-0.92, 1.09], [-0.62, 0.97], [-0.42, 0.93]]
+
+function Wheel({ position, spin, front }: { position: [number, number, number]; spin: React.MutableRefObject<number>; front?: boolean }) {
   const g = useRef<THREE.Group>(null)
   useFrame(() => {
     if (g.current) g.current.rotation.z = -spin.current
   })
+  const tube = front ? 0.07 : 0.085
+  // keep rim + stripe just inside the tire's inner edge so the fatter rear tire doesn't swallow them
+  const rim = 0.29 - tube - 0.008
   return (
     <group position={position}>
       <group ref={g}>
         <mesh castShadow>
-          <torusGeometry args={[0.29, 0.075, 20, 64]} />
-          <meshStandardMaterial color="#0c0a12" roughness={0.75} />
+          <torusGeometry args={[0.29, tube, 20, 64]} />
+          <meshStandardMaterial color="#0c0b10" roughness={0.8} />
         </mesh>
-        <mesh>
-          <torusGeometry args={[0.232, 0.014, 12, 64]} />
-          <Glow color={hubMotor ? PINK : TEAL} intensity={2.6} />
-        </mesh>
-        <mesh>
-          <torusGeometry args={[0.215, 0.02, 12, 64]} />
-          <meshStandardMaterial color="#26222f" metalness={0.9} roughness={0.3} />
-        </mesh>
-        {Array.from({ length: 6 }, (_, i) => (
-          <mesh key={i} rotation-z={(i / 6) * Math.PI * 2}>
-            <boxGeometry args={[0.018, 0.42, 0.02]} />
-            <meshStandardMaterial color="#3a3446" metalness={0.8} roughness={0.35} />
+        {/* signature yellow rim stripe, both faces */}
+        {[-1, 1].map((s) => (
+          <mesh key={s} position-z={s * 0.028}>
+            <torusGeometry args={[rim + 0.004, 0.006, 8, 64]} />
+            <Glow color={YELLOW} intensity={1.8} />
           </mesh>
         ))}
-        <mesh rotation-x={Math.PI / 2}>
-          <cylinderGeometry args={[hubMotor ? 0.11 : 0.045, hubMotor ? 0.11 : 0.045, hubMotor ? 0.14 : 0.12, 32]} />
-          <meshStandardMaterial color="#1b1824" metalness={0.9} roughness={0.25} />
+        <mesh>
+          <torusGeometry args={[rim - 0.01, 0.022, 12, 64]} />
+          <meshStandardMaterial color="#141418" metalness={0.8} roughness={0.35} />
         </mesh>
-        {hubMotor && (
-          <mesh rotation-x={Math.PI / 2}>
-            <torusGeometry args={[0.1, 0.008, 8, 48]} />
-            <Glow color={TEAL} intensity={3} />
-          </mesh>
+        {/* split Y-spokes */}
+        {Array.from({ length: 5 }, (_, i) =>
+          [-0.14, 0.14].map((o) => (
+            <mesh key={`${i}${o}`} rotation-z={(i / 5) * Math.PI * 2 + o} position={[Math.sin(-((i / 5) * Math.PI * 2 + o)) * 0.11, Math.cos((i / 5) * Math.PI * 2 + o) * 0.11, 0]}>
+              <boxGeometry args={[0.016, rim - 0.04, 0.018]} />
+              <meshStandardMaterial color="#17161c" metalness={0.8} roughness={0.35} />
+            </mesh>
+          )),
         )}
+        <mesh rotation-x={Math.PI / 2}>
+          <cylinderGeometry args={[0.05, 0.05, 0.12, 24]} />
+          <meshStandardMaterial color="#1b1a22" metalness={0.9} roughness={0.25} />
+        </mesh>
       </group>
-      {/* brake disc stays put */}
-      <mesh rotation-x={Math.PI / 2} position={[0, 0, 0.065]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.006, 40]} />
-        <meshStandardMaterial color="#9a9aa8" metalness={1} roughness={0.2} />
+      <mesh rotation-x={Math.PI / 2} position={[0, 0, front ? 0.07 : -0.07]}>
+        <cylinderGeometry args={[front ? 0.16 : 0.11, front ? 0.16 : 0.11, 0.006, 40]} />
+        <meshStandardMaterial color="#a6a6b2" metalness={1} roughness={0.22} />
       </mesh>
     </group>
   )
@@ -85,11 +110,17 @@ function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
   const headlight = useRef<THREE.MeshBasicMaterial>(null)
   const under = useRef<THREE.PointLight>(null)
 
-  const paint = useMemo(
-    () => new THREE.MeshPhysicalMaterial({ color: '#2a0f66', metalness: 0.6, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.08 }),
+  const silver = useMemo(
+    () => new THREE.MeshPhysicalMaterial({ color: '#cfd5dd', metalness: 0.65, roughness: 0.2, clearcoat: 1, clearcoatRoughness: 0.06 }),
     [],
   )
-  const dark = useMemo(() => new THREE.MeshStandardMaterial({ color: '#141019', metalness: 0.7, roughness: 0.35 }), [])
+  const black = useMemo(() => new THREE.MeshStandardMaterial({ color: '#121216', metalness: 0.45, roughness: 0.45 }), [])
+  const gloss = useMemo(() => new THREE.MeshPhysicalMaterial({ color: '#0e0e12', metalness: 0.6, roughness: 0.25, clearcoat: 0.8 }), [])
+  const seat = useMemo(() => new THREE.MeshStandardMaterial({ color: '#26262c', roughness: 0.85 }), [])
+  const yellow = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: '#c8f000', emissive: '#b8e600', emissiveIntensity: 0.35, metalness: 0.3, roughness: 0.35 }),
+    [],
+  )
 
   useFrame(({ clock }, dt) => {
     const target = motion ? 1.2 + throttle.current * 22 : 0
@@ -97,98 +128,128 @@ function Bike({ throttle, motion }: { throttle: Throttle; motion: boolean }) {
     spin.current += speed.current * dt
     if (root.current) {
       const t = clock.elapsedTime
-      // wheelie-ish pitch + chassis vibration when on the throttle
       root.current.rotation.z = THREE.MathUtils.lerp(root.current.rotation.z, throttle.current * 0.12, 0.08)
       root.current.position.y = throttle.current * Math.sin(t * 60) * 0.004
     }
-    if (headlight.current) headlight.current.color.setRGB(2 + throttle.current * 4, 2.6 + throttle.current * 4, 3 + throttle.current * 4)
+    if (headlight.current) headlight.current.color.setRGB(2.4 + throttle.current * 4, 2.6 + throttle.current * 4, 3 + throttle.current * 4)
     if (under.current) under.current.intensity = 6 + throttle.current * 14
   })
 
   return (
     <group ref={root}>
-      <group position={[0, 0, 0]}>
-        <Wheel position={[0.74, 0.365, 0]} spin={spin} />
-        <Wheel position={[-0.74, 0.365, 0]} spin={spin} hubMotor />
+      <Wheel position={[0.74, 0.365, 0]} spin={spin} front />
+      <Wheel position={[-0.74, 0.365, 0]} spin={spin} />
 
-        {/* Battery pack: the heart of an electric bike */}
-        <RoundedBox args={[0.66, 0.38, 0.26]} radius={0.04} position={[-0.02, 0.58, 0]} material={dark} castShadow />
-        {[-0.14, 0, 0.14].map((x) => (
-          <mesh key={x} position={[x - 0.02, 0.58, 0.132]}>
-            <boxGeometry args={[0.09, 0.26, 0.004]} />
-            <Glow color={TEAL} intensity={1.4} />
-          </mesh>
-        ))}
-        <mesh position={[-0.02, 0.41, 0.132]}>
-          <boxGeometry args={[0.62, 0.012, 0.006]} />
-          <Glow color={PINK} intensity={3} />
-        </mesh>
+      {/* Front hugger */}
+      <mesh position={[0.74, 0.365, 0]} rotation-z={Math.PI * 0.18}>
+        <torusGeometry args={[0.39, 0.02, 8, 24, Math.PI * 0.42]} />
+        <primitive object={black} attach="material" />
+      </mesh>
 
-        {/* Tank shroud */}
-        <RoundedBox args={[0.56, 0.2, 0.3]} radius={0.07} position={[0.12, 0.86, 0]} rotation-z={-0.18} material={paint} castShadow />
-        <mesh position={[0.12, 0.86, 0.152]} rotation-z={-0.18}>
-          <boxGeometry args={[0.46, 0.014, 0.004]} />
-          <Glow color={PINK} intensity={3} />
-        </mesh>
+      {/* Bodywork */}
+      <Panel pts={BODY} depth={0.26} material={black} />
+      <Panel pts={TANK} depth={0.3} material={silver} bevel={0.02} />
+      {[-1, 1].map((s) => (
+        <Panel key={s} pts={ACCENT} depth={0.004} z={s * 0.142} material={yellow} bevel={0.002} />
+      ))}
+      <Panel pts={SEAT} depth={0.24} material={seat} bevel={0.02} />
+      <Panel pts={TAIL} depth={0.18} material={silver} bevel={0.015} />
+      <mesh position={[-0.915, 1.1, 0]} rotation-z={0.26}>
+        <boxGeometry args={[0.02, 0.035, 0.17]} />
+        <Glow color={RED} intensity={4} />
+      </mesh>
 
-        {/* Seat + tail */}
-        <RoundedBox args={[0.5, 0.08, 0.25]} radius={0.035} position={[-0.38, 0.87, 0]} rotation-z={0.06} material={dark} />
-        <RoundedBox args={[0.36, 0.1, 0.18]} radius={0.04} position={[-0.72, 0.93, 0]} rotation-z={0.22} material={paint} />
-        <mesh position={[-0.9, 0.97, 0]} rotation-z={0.22}>
-          <boxGeometry args={[0.02, 0.04, 0.16]} />
-          <Glow color={PINK} intensity={5} />
-        </mesh>
+      {/* Mid-mounted motor + belt drive */}
+      <mesh position={[-0.2, 0.42, 0]} rotation-x={Math.PI / 2}>
+        <cylinderGeometry args={[0.13, 0.13, 0.24, 32]} />
+        <primitive object={gloss} attach="material" />
+      </mesh>
+      <mesh position={[-0.2, 0.42, 0.121]}>
+        <torusGeometry args={[0.1, 0.006, 8, 48]} />
+        <Glow color={YELLOW} intensity={1.4} />
+      </mesh>
+      <RoundedBox args={[0.6, 0.13, 0.05]} radius={0.04} position={[-0.47, 0.395, -0.13]} rotation-z={0.1} material={gloss} castShadow />
+      <Rod a={[-0.25, 0.44, 0.11]} b={[-0.74, 0.365, 0.11]} r={0.032}>
+        <primitive object={black} attach="material" />
+      </Rod>
 
-        {/* Swingarm + shock */}
-        {[-0.085, 0.085].map((z) => (
-          <Rod key={z} a={[-0.74, 0.365, z]} b={[-0.22, 0.46, z]} r={0.024}>
-            <meshStandardMaterial color="#2c2837" metalness={0.9} roughness={0.3} />
+      {/* Rear shock + subframe */}
+      <Rod a={[-0.3, 0.52, 0.02]} b={[-0.46, 0.86, 0.02]} r={0.026}>
+        <primitive object={black} attach="material" />
+      </Rod>
+      <mesh position={[-0.37, 0.67, 0.07]} rotation-z={0.44}>
+        <cylinderGeometry args={[0.022, 0.022, 0.12, 16]} />
+        <meshStandardMaterial color="#c0152f" metalness={0.6} roughness={0.35} />
+      </mesh>
+      {[-0.08, 0.08].map((z) => (
+        <Rod key={z} a={[-0.26, 0.78, z]} b={[-0.72, 1.0, z]} r={0.014}>
+          <primitive object={black} attach="material" />
+        </Rod>
+      ))}
+
+      {/* License plate hanger */}
+      <Rod a={[-0.84, 1.03, 0]} b={[-0.93, 0.8, 0]} r={0.012}>
+        <primitive object={black} attach="material" />
+      </Rod>
+      <mesh position={[-0.94, 0.74, 0]} rotation-z={0.25}>
+        <boxGeometry args={[0.006, 0.1, 0.16]} />
+        <meshStandardMaterial color="#6b6b75" roughness={0.7} />
+      </mesh>
+
+      {/* Upside-down forks */}
+      {[-0.1, 0.1].map((z) => (
+        <group key={z}>
+          <Rod a={[0.74, 0.365, z]} b={[0.49, 1.03, z]} r={0.028}>
+            <meshStandardMaterial color="#1a1a20" metalness={0.8} roughness={0.3} />
           </Rod>
-        ))}
-        <Rod a={[-0.3, 0.52, 0]} b={[-0.56, 0.8, 0]} r={0.03}>
-          <Glow color={PINK} intensity={1.6} />
-        </Rod>
+          <Rod a={[0.74, 0.365, z]} b={[0.67, 0.56, z]} r={0.034}>
+            <meshStandardMaterial color="#2b2b33" metalness={0.9} roughness={0.25} />
+          </Rod>
+        </group>
+      ))}
+      <RoundedBox args={[0.1, 0.05, 0.28]} radius={0.015} position={[0.49, 1.04, 0]} material={black} />
 
-        {/* Trellis frame hints */}
-        {[-0.14, 0.14].map((z) => (
-          <group key={z}>
-            <Rod a={[0.5, 0.95, z * 0.6]} b={[-0.2, 0.74, z]} r={0.016}>
-              <meshStandardMaterial color="#ff4fd8" metalness={0.8} roughness={0.3} emissive="#ff2e97" emissiveIntensity={0.25} />
-            </Rod>
-            <Rod a={[-0.2, 0.74, z]} b={[-0.6, 0.86, z * 0.6]} r={0.014}>
-              <meshStandardMaterial color="#ff4fd8" metalness={0.8} roughness={0.3} emissive="#ff2e97" emissiveIntensity={0.25} />
-            </Rod>
-          </group>
-        ))}
-
-        {/* Forks */}
-        {[-0.095, 0.095].map((z) => (
-          <Rod key={z} a={[0.74, 0.365, z]} b={[0.5, 1.0, z]} r={0.024} />
-        ))}
-        <Rod a={[0.5, 1.02, -0.11]} b={[0.5, 1.02, 0.11]} r={0.03}>
-          <meshStandardMaterial color="#1d1a26" metalness={0.8} roughness={0.3} />
-        </Rod>
-
-        {/* Handlebars */}
-        <Rod a={[0.44, 1.1, -0.33]} b={[0.44, 1.1, 0.33]} r={0.014} />
-        {[-0.33, 0.33].map((z) => (
-          <mesh key={z} position={[0.44, 1.1, z]} rotation-x={Math.PI / 2}>
-            <cylinderGeometry args={[0.022, 0.022, 0.1, 12]} />
-            <meshStandardMaterial color="#0d0b12" roughness={0.8} />
-          </mesh>
-        ))}
-
-        {/* Headlight cowl */}
-        <RoundedBox args={[0.14, 0.2, 0.22]} radius={0.05} position={[0.6, 0.98, 0]} rotation-z={-0.35} material={paint} />
-        <mesh position={[0.665, 0.98, 0]} rotation-z={-0.35}>
-          <boxGeometry args={[0.012, 0.13, 0.16]} />
+      {/* Round LED headlight */}
+      <group position={[0.635, 0.97, 0]} rotation-z={-0.3}>
+        <mesh rotation-z={Math.PI / 2}>
+          <cylinderGeometry args={[0.095, 0.085, 0.09, 32]} />
+          <primitive object={black} attach="material" />
+        </mesh>
+        <mesh position-x={0.047} rotation-z={Math.PI / 2}>
+          <cylinderGeometry args={[0.072, 0.072, 0.004, 32]} />
           <meshBasicMaterial ref={headlight} toneMapped={false} />
         </mesh>
-        <mesh position={[0.67, 1.075, 0]} rotation-z={-0.35}>
-          <boxGeometry args={[0.012, 0.018, 0.18]} />
-          <Glow color={TEAL} intensity={4} />
+        <mesh position-x={0.05} rotation-y={Math.PI / 2}>
+          <torusGeometry args={[0.08, 0.007, 8, 48]} />
+          <Glow color={new THREE.Color('#ffffff')} intensity={3} />
         </mesh>
       </group>
+
+      {/* Dash, bars, round mirrors */}
+      <mesh position={[0.46, 1.13, 0]} rotation-z={-0.5}>
+        <boxGeometry args={[0.018, 0.09, 0.13]} />
+        <primitive object={black} attach="material" />
+      </mesh>
+      <mesh position={[0.47, 1.135, 0]} rotation-z={-0.5}>
+        <boxGeometry args={[0.004, 0.07, 0.11]} />
+        <Glow color={TEAL} intensity={1.2} />
+      </mesh>
+      <Rod a={[0.43, 1.12, -0.34]} b={[0.43, 1.12, 0.34]} r={0.014} />
+      {[-1, 1].map((s) => (
+        <group key={s}>
+          <mesh position={[0.43, 1.12, s * 0.34]} rotation-x={Math.PI / 2}>
+            <cylinderGeometry args={[0.022, 0.022, 0.1, 12]} />
+            <meshStandardMaterial color="#0d0c12" roughness={0.8} />
+          </mesh>
+          <Rod a={[0.43, 1.12, s * 0.26]} b={[0.4, 1.3, s * 0.3]} r={0.008}>
+            <primitive object={black} attach="material" />
+          </Rod>
+          <mesh position={[0.4, 1.33, s * 0.3]} rotation-z={Math.PI / 2}>
+            <cylinderGeometry args={[0.045, 0.045, 0.012, 24]} />
+            <primitive object={black} attach="material" />
+          </mesh>
+        </group>
+      ))}
 
       <pointLight ref={under} position={[0, 0.08, 0]} color="#ff2e97" intensity={6} distance={2.4} />
     </group>

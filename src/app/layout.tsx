@@ -9,7 +9,7 @@ const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '600'], variab
 export const metadata: Metadata = {
   title: 'Tiffany — Software Engineer',
   description:
-    'Tiffany is a senior software engineer with 6+ years building products: frontend architecture, design systems, scientific data visualization, mobile and full-stack.',
+    'Tiffany is a senior software engineer with 6+ years building products: frontend architecture, design systems, large-scale data visualization, mobile and full-stack.',
   openGraph: {
     title: 'Tiffany — Software Engineer',
     description: 'Frontend architecture, design systems, data viz at 250k points, and electric motorcycles.',

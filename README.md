@@ -26,7 +26,7 @@ The base path comes from `actions/configure-pages`, so the site works as a proje
 | --- | --- |
 | `src/components/three/city/` | Procedural WebGL city (instanced buildings, custom window shader, signs, traffic, rain, bloom) + SVG fallback |
 | `src/components/three/moto/` | Procedural 3D electric motorcycle with hold-to-throttle |
-| `src/components/sections/Lab.tsx` | The Purr-teome: volcano plot rendered into an ImageData buffer, quadtree hover, hidden genes |
+| `src/components/sections/Lab.tsx` | The Laser Pointer Report: volcano plot rendered into an ImageData buffer, quadtree hover, hidden signals |
 | `src/components/extras/` | Boot sequence, custom cursor, cyber-cat, Konami code, achievement toasts |
 | `src/lib/content.ts` | All copy: skills, strengths, projects, links |
 | `src/lib/motion.tsx` | Motion toggle (respects `prefers-reduced-motion`, persisted) + overdrive state |
@@ -39,4 +39,4 @@ The base path comes from `actions/configure-pages`, so the site works as a proje
 
 ## Easter eggs
 
-↑↑↓↓←→←→BA · tap the logo 7× · pet the cat 10× · find all six secret genes in the Lab · shift + double-click the cat to shoo it
+↑↑↓↓←→←→BA · tap the logo 7× · pet the cat 10× · find all six secret signals in the Lab · shift + double-click the cat to shoo it

@@ -30,10 +30,10 @@ export const skillGroups = [
   },
   {
     id: 'viz',
-    title: 'Scientific Viz',
+    title: 'Data Viz',
     glyph: '03',
     color: 'purple',
-    items: ['D3', 'Plotly', 'Omics data', 'Genomics', 'Biological data', 'Volcano plots', 'Violin plots', 'Scatter & dot plots', '250k+ point datasets', 'FE + BE perf safeguards'],
+    items: ['D3', 'Plotly', 'Volcano plots', 'Violin plots', 'Scatter & dot plots', '250k+ point datasets', 'FE + BE perf safeguards'],
   },
   {
     id: 'money',
